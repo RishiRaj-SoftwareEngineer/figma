@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Trip Australia - Payment</title>
+<title>Trip Australia - Payment Confirmation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -401,10 +401,115 @@
   @media (prefers-reduced-motion: reduce) {
     .pay-option, .continue-btn, .tab, .back-btn { transition: none; }
   }
+
+  /* success modal overlay */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    background: rgba(17,42,20,.26);
+    animation: fadeIn .3s ease-out;
+  }
+
+  .modal {
+    position: relative;
+    width: 320px;
+    height: 360px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: 0 26px 54px rgba(15,45,20,.34);
+    animation: popIn .4s cubic-bezier(.2,.9,.3,1.25);
+  }
+
+  .overlay.is-hidden { opacity: 0; pointer-events: none; transition: opacity .26s ease; }
+  .overlay.is-hidden .modal { transform: scale(.94); transition: transform .26s ease; }
+
+  .badge-stage {
+    position: relative;
+    flex: none;
+    width: 190px; height: 132px;
+    display: grid;
+    place-items: center;
+  }
+
+  .badge-stage::before {
+    content: "";
+    position: absolute;
+    width: 118px; height: 118px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(179,212,240,.55) 0%, rgba(179,212,240,0) 70%);
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(179,212,240,.9);
+  }
+
+  .ring.r1 { width: 128px; height: 128px; }
+  .ring.r2 { width: 158px; height: 158px; border-color: rgba(179,212,240,.5); }
+
+  .blob { position: absolute; border-radius: 50%; background: #B3D4F0; }
+  .blob.b1 { width: 16px; height: 16px; left: 15px; top: 22px; opacity: .85; }
+  .blob.b2 { width: 10px; height: 10px; right: 22px; top: 10px; opacity: .7; }
+  .blob.b3 { width: 24px; height: 24px; right: 6px; bottom: 16px; opacity: .45; }
+  .blob.b4 { width: 12px; height: 12px; left: 34px; bottom: 4px; opacity: .6; }
+
+  .badge { position: relative; width: 100px; height: 100px; }
+  .badge svg { display: block; width: 100%; height: 100%; }
+
+  .modal-title {
+    flex: none;
+    margin: 14px 0 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.2px;
+    text-align: center;
+    color: var(--navy);
+  }
+
+  .modal-text {
+    flex: none;
+    margin: 6px 0 0;
+    max-width: 232px;
+    font-size: 10.5px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .receipt {
+    flex: none;
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border-radius: 14px;
+    background: var(--gray-card);
+  }
+
+  .receipt-row { display: flex; align-items: center; justify-content: space-between; }
+  .r-label { font-size: 10.5px; font-weight: 500; color: var(--muted); }
+  .r-value { font-size: 11px; font-weight: 600; letter-spacing: .01em; color: var(--navy); }
+  .r-value.accent { font-size: 12.5px; font-weight: 700; color: var(--green-deep); }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes popIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
 </style>
 </head>
 <body>
-  <main class="screen" aria-label="Trip Australia payment screen">
+  <main class="screen" aria-label="Trip Australia payment confirmation screen">
 
     <div class="page">
 
@@ -541,7 +646,34 @@
 
       <span class="nav-home-bar" aria-hidden="true"></span>
     </nav>
-  </main>
+
+    <div class="overlay" id="overlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalText">
+        <div class="badge-stage" aria-hidden="true">
+          <span class="ring r1"></span>
+          <span class="ring r2"></span>
+          <span class="blob b1"></span>
+          <span class="blob b2"></span>
+          <span class="blob b3"></span>
+          <span class="blob b4"></span>
+          <div class="badge">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="16" stroke-linecap="round" stroke-dasharray="0 17.6"/>
+              <path d="M32.5 51.5 44 63.5 68 38" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="modal-title" id="modalTitle">Payment done successfully.</h2>
+        <p class="modal-text" id="modalText">Your seat is confirmed and a receipt has been sent to your email.</p>
+
+        <div class="receipt">
+          <div class="receipt-row"><span class="r-label">Amount Paid</span><span class="r-value accent">A$247</span></div>
+          <div class="receipt-row"><span class="r-label">Payment Method</span><span class="r-value">VISA ********0017</span></div>
+          <div class="receipt-row"><span class="r-label">Booking Ref</span><span class="r-value">TA-84721</span></div>
+        </div>
+      </div>
+    </div>  </main>
 
 <script>
   const payOptions = Array.prototype.slice.call(document.querySelectorAll(".pay-option"));
@@ -572,13 +704,22 @@
 
   syncPayment();
 
-  document.getElementById("continueBtn").addEventListener("click", function (event) {
-    const selected = document.querySelector('input[name="payment"]:checked');
-    event.currentTarget.textContent = "Paying with " + selected.value.toUpperCase();
-    window.setTimeout(function () {
-      event.currentTarget.textContent = "Continue";
-    }, 1400);
-  });
-</script>
+
+  /* success modal */
+  const overlay = document.getElementById("overlay");
+  const modalBox = overlay.querySelector(".modal");
+
+  function dismissModal() {
+    if (overlay.classList.contains("is-hidden")) return;
+    overlay.classList.add("is-hidden");
+    window.setTimeout(function () { overlay.style.display = "none"; }, 280);
+  }
+
+  overlay.addEventListener("click", dismissModal);
+  modalBox.addEventListener("click", function (event) { event.stopPropagation(); });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") dismissModal();
+  });</script>
 </body>
 </html>
