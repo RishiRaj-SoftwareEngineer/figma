@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Trip Australia - E-Ticket</title>
+<title>Trip Australia - Create an Account</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,15 +16,10 @@
     --navy: #1A237E;
     --cream: #FFF9C4;
     --cream-ink: #8D6E00;
-    --pink: #F8D7DA;
-    --red: #D32F2F;
-    --gray-bar: #B0BEC5;
-    --gray-card: #F4F5F7;
-    --gray: #E0E0E0;
-    --muted: #8B93A7;
-    --line: #E4E7ED;
+    --line: #E6EAEF;
+    --alert: #D32F2F;
     --white: #FFFFFF;
-    --card-shadow: 0 14px 30px rgba(20,45,25,.16);
+    --card-shadow: 0 18px 38px rgba(20,45,25,.18), 0 2px 6px rgba(20,45,25,.05);
   }
 
   html, body { margin: 0; padding: 0; }
@@ -56,8 +51,8 @@
   .screen::before {
     content: "";
     position: absolute;
-    top: -140px; right: -120px;
-    width: 300px; height: 300px;
+    top: -150px; right: -120px;
+    width: 320px; height: 320px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 68%);
     pointer-events: none;
@@ -82,148 +77,145 @@
     padding-bottom: 2px;
   }
 
+  .back-btn {
+    flex: none;
+    width: 40px; height: 40px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(255,255,255,.9);
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--white);
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(30,90,40,.28);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+
+  .back-btn svg { width: 18px; height: 18px; }
+  .back-btn:hover { transform: translateY(-1px); box-shadow: 0 9px 18px rgba(30,90,40,.34); }
+  .back-btn:active { transform: scale(.93); }
+  .back-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.6), 0 6px 14px rgba(30,90,40,.28); }
+
+  /* heading */
   .page-title {
     position: relative;
     z-index: 2;
     flex: none;
-    margin: 2px 0 0;
-    font-size: 36px;
+    margin: 8px 0 0;
+    font-size: 32px;
     font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -.6px;
+    line-height: 1.2;
+    letter-spacing: -.8px;
     text-align: center;
     color: var(--navy);
   }
 
-  /* ticket card */
-  .ticket {
+  .page-sub {
     position: relative;
     z-index: 2;
     flex: none;
-    align-self: center;
-    width: 353px;
-    height: 620px;
-    margin-top: 12px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    margin: 6px 0 0;
+    padding: 0 12px;
+    font-size: 11.5px;
+    font-weight: 400;
+    line-height: 1.45;
+    text-align: center;
+    color: rgba(26,35,126,.72);
+  }
+
+  /* card */
+  .card {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    margin-top: 16px;
+    padding: 24px;
     border-radius: 24px;
     background: var(--white);
     box-shadow: var(--card-shadow);
-    --cut: 11px;
-    --cut-y: 310px;
-    -webkit-mask-image:
-      radial-gradient(circle var(--cut) at 0 var(--cut-y), transparent 98%, #000 100%),
-      radial-gradient(circle var(--cut) at 100% var(--cut-y), transparent 98%, #000 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      radial-gradient(circle var(--cut) at 0 var(--cut-y), transparent 98%, #000 100%),
-      radial-gradient(circle var(--cut) at 100% var(--cut-y), transparent 98%, #000 100%);
-    mask-composite: intersect;
   }
 
-  .top-bar {
-    flex: none;
-    height: 10px;
-    background: var(--gray-bar);
+  /* fields */
+  .field { position: relative; display: block; margin-top: 14px; }
+  .field:first-of-type { margin-top: 0; }
+
+  .field-icon {
+    position: absolute;
+    left: 16px; top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    color: rgba(26,35,126,.42);
+    pointer-events: none;
+    transition: color .18s ease;
   }
 
-  .ticket-body {
-    flex: 1;
-    min-height: 0;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-  }
+  .field-icon svg { width: 18px; height: 18px; }
 
-  /* pink flight summary */
-  .flight-bar {
-    flex: none;
-    height: 92px;
-    padding: 13px 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 14px;
-    background: var(--pink);
-  }
-
-  .fb-row { display: flex; align-items: center; gap: 10px; }
-  .fb-point { display: flex; flex-direction: column; gap: 2px; }
-  .fb-point.right { align-items: flex-end; text-align: right; }
-
-  .fb-time {
-    font-size: 13.5px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -.2px;
-    color: var(--red);
-  }
-
-  .fb-code { font-size: 9.5px; font-weight: 600; letter-spacing: .12em; color: rgba(211,47,47,.72); }
-
-  .fb-mid { flex: 1; display: flex; align-items: center; gap: 5px; }
-  .fb-mid .dash { flex: 1; height: 1.5px; border-radius: 2px; background: repeating-linear-gradient(90deg, rgba(211,47,47,.55) 0 4px, transparent 4px 8px); }
-  .fb-mid svg { flex: none; width: 14px; height: 14px; color: rgba(211,47,47,.75); transform: rotate(90deg); }
-
-  .fb-meta { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; color: #A9505A; }
-  .fb-meta .sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(169,80,90,.6); }
-
-  /* flight details */
-  .details-panel {
-    flex: none;
+  .field-input {
+    width: 100%;
     height: 56px;
-    margin-top: 14px;
-    padding: 0 12px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    border-radius: 14px;
-    background: var(--gray-card);
-  }
-
-  .cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-  .cell + .cell { padding-left: 10px; border-left: 1px solid rgba(176,190,197,.45); }
-
-  .cell-value {
+    padding: 0 48px;
+    border: 1.5px solid var(--line);
+    border-radius: 15px;
+    background: var(--white);
+    font-family: inherit;
     font-size: 12.5px;
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -.2px;
+    font-weight: 500;
     color: var(--navy);
-    white-space: nowrap;
+    outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease;
   }
 
-  .cell-label {
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
+  .field-input::placeholder { color: rgba(26,35,126,.42); font-weight: 400; }
+  .field-input:hover { border-color: #D5DCE4; }
+  .field-input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(76,175,80,.16); }
+  .field:focus-within .field-icon { color: var(--green); }
 
-  /* passenger details */
-  .passenger-row {
-    flex: none;
-    height: 50px;
-    margin-top: 12px;
+  .field-eye {
+    position: absolute;
+    right: 9px; top: 50%;
+    transform: translateY(-50%);
+    width: 38px; height: 38px;
     display: grid;
-    grid-template-columns: 1.35fr 1.15fr .8fr;
-    align-items: center;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    place-items: center;
+    border: 0;
+    border-radius: 11px;
+    background: none;
+    color: rgba(26,35,126,.42);
+    cursor: pointer;
+    transition: color .18s ease, background-color .18s ease;
   }
 
-  .p-cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding-right: 8px; }
-  .p-value { font-size: 12.5px; font-weight: 600; line-height: 1.15; color: var(--navy); white-space: nowrap; }
-  .p-value.seat { font-weight: 700; color: var(--green-deep); }
-  .p-label { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .field-eye svg { width: 18px; height: 18px; }
+  .field-eye:hover { color: var(--navy); background: #F2F5F8; }
+  .field-eye:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(76,175,80,.3); }
 
-  /* cream notice */
-  .ticket-note {
-    flex: none;
+  .field-error {
+    margin: 6px 0 0 4px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--alert);
+    display: none;
+  }
+
+  .field.has-error .field-input,
+  .field.has-error .field-input:focus { border-color: var(--alert); box-shadow: 0 0 0 3px rgba(211,47,47,.14); }
+  .field.has-error .field-error { display: block; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  .field.shake { animation: shake .28s ease-in-out; }
+
+  /* cream note */
+  .signup-note {
     height: 36px;
-    margin-top: 12px;
+    margin-top: 16px;
     padding: 0 12px;
     display: flex;
     align-items: center;
@@ -232,69 +224,20 @@
     background: var(--cream);
   }
 
-  .ticket-note svg { flex: none; width: 13px; height: 13px; color: var(--cream-ink); }
-  .ticket-note span { font-size: 10px; font-weight: 500; color: var(--cream-ink); }
+  .signup-note svg { flex: none; width: 13px; height: 13px; color: var(--cream-ink); }
+  .signup-note span { font-size: 10px; font-weight: 500; color: var(--cream-ink); }
 
-  /* perforation */
-  .perforation {
-    position: relative;
-    flex: none;
-    height: 24px;
-    margin-bottom: 12px;
-  }
-
-  .perforation::before {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    top: 50%;
-    height: 2px;
-    transform: translateY(-50%);
-    background: repeating-linear-gradient(90deg, #D8DFE8 0 6px, transparent 6px 12px);
-  }
-
-  /* QR */
-  .qr-block {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-  }
-
-  .qr { flex: none; width: 180px; height: 180px; }
-  .qr svg { display: block; width: 100%; height: 100%; }
-
-  .qr-caption { margin: 0; font-size: 10px; font-weight: 500; color: var(--muted); }
-  .qr-ref { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .02em; color: var(--navy); }
-
-  /* bottom actions */
-  .actions {
-    position: relative;
-    z-index: 2;
-    flex: none;
-    align-self: center;
-    width: 353px;
-    margin-top: 14px;
-    display: flex;
-    gap: 13px;
-  }
-
-  .action-btn {
-    flex: 1;
+  /* register button */
+  .register-btn {
+    width: 100%;
     height: 56px;
+    margin-top: 18px;
     border: 0;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    border-radius: 28px;
     font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .12em;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: .14em;
     color: var(--white);
     cursor: pointer;
     background: var(--green);
@@ -302,197 +245,245 @@
     transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
   }
 
-  .action-btn svg { width: 17px; height: 17px; }
-  .action-btn:hover { background: #43A047; transform: translateY(-1px); box-shadow: 0 13px 26px rgba(76,175,80,.42); }
-  .action-btn:active { transform: scale(.98); box-shadow: 0 6px 14px rgba(76,175,80,.30); }
-  .action-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 0 0 6px rgba(76,175,80,.6); }
+  .register-btn:hover { background: #43A047; transform: translateY(-1px); box-shadow: 0 14px 26px rgba(76,175,80,.42); }
+  .register-btn:active { transform: scale(.98); box-shadow: 0 6px 14px rgba(76,175,80,.30); }
+  .register-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.9), 0 0 0 6px rgba(76,175,80,.6); }
+
+  /* divider */
+  .divider { margin-top: 20px; display: flex; align-items: center; gap: 12px; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .divider span { font-size: 11px; font-weight: 500; color: rgba(26,35,126,.5); white-space: nowrap; }
+
+  /* socials */
+  .socials { margin-top: 16px; display: flex; justify-content: space-between; }
+
+  .social {
+    width: 56px; height: 56px;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid var(--line);
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--navy);
+    cursor: pointer;
+    transition: transform .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+  }
+
+  .social svg { width: 20px; height: 20px; }
+  .social:hover { transform: translateY(-2px); border-color: rgba(76,175,80,.55); color: var(--green); box-shadow: 0 8px 16px rgba(76,175,80,.16); }
+  .social:active { transform: scale(.96); }
+  .social:focus-visible { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(76,175,80,.25); }
+
+  /* terms */
+  .terms {
+    margin: 16px 0 0;
+    font-size: 9.5px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    color: rgba(26,35,126,.5);
+  }
+
+  .terms a { color: var(--navy); font-weight: 600; text-decoration: none; }
+  .terms a:hover { text-decoration: underline; }
+
+  /* travel flourish */
+  .flourish { position: relative; z-index: 2; flex: none; margin-top: 24px; display: grid; place-items: center; }
+  .flourish svg { display: block; width: 224px; height: auto; }
+
+  /* footer */
+  .footer {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    margin-top: auto;
+    margin-bottom: 12px;
+    font-size: 11.5px;
+    font-weight: 400;
+    text-align: center;
+    color: rgba(26,35,126,.75);
+  }
+
+  .footer a { font-weight: 700; color: var(--green-deep); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+  .footer a:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(76,175,80,.3); border-radius: 6px; }
+
+  .home-indicator {
+    flex: none;
+    margin-bottom: 9px;
+    align-self: center;
+    width: 126px; height: 5px;
+    border-radius: 99px;
+    background: rgba(255,255,255,.72);
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .action-btn { transition: none; }
+    .register-btn, .social, .back-btn, .field-input, .field-eye { transition: none; }
+    .field.shake { animation: none; }
   }
 </style>
 </head>
 <body>
-  <main class="screen" aria-label="Trip Australia e-ticket screen">
+  <main class="screen" aria-label="Trip Australia create account screen">
 
     <header class="app-bar">
       <div class="brand">Trip Australia</div>
+      <button class="back-btn" type="button" aria-label="Go back">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </header>
 
-    <h1 class="page-title">E-Ticket</h1>
+    <h1 class="page-title">Create an Account</h1>
+    <p class="page-sub">Join Trip Australia to book flights, choose your seat and carry your e-ticket.</p>
 
-    <section class="ticket" aria-label="Boarding pass">
-      <span class="top-bar" aria-hidden="true"></span>
+    <section class="card" aria-label="Registration form">
 
-      <div class="ticket-body">
-
-        <div class="flight-bar">
-          <div class="fb-row">
-            <div class="fb-point">
-              <span class="fb-time">06:00 AM</span>
-              <span class="fb-code">SYD</span>
-            </div>
-            <div class="fb-mid">
-              <span class="dash"></span>
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M21 15.5 13.5 12V5.2a1.6 1.6 0 0 0-3.2 0V12L3 15.5V17l7.3-2.1v3.6l-2.2 1.6v1.3l3.8-1.1 3.8 1.1v-1.3L13.5 18.5v-3.6L21 17z"/>
-              </svg>
-              <span class="dash"></span>
-            </div>
-            <div class="fb-point right">
-              <span class="fb-time">07:35 AM</span>
-              <span class="fb-code">MEL</span>
-            </div>
-          </div>
-          <div class="fb-meta">1 hr 35 min<span class="sep"></span>Virgin Australia</div>
-        </div>
-
-        <div class="details-panel">
-          <div class="cell">
-            <span class="cell-value">Economy</span>
-            <span class="cell-label">Class</span>
-          </div>
-          <div class="cell">
-            <span class="cell-value">4</span>
-            <span class="cell-label">Gate</span>
-          </div>
-          <div class="cell">
-            <span class="cell-value">3</span>
-            <span class="cell-label">Terminal</span>
-          </div>
-          <div class="cell">
-            <span class="cell-value">VH-IJQ</span>
-            <span class="cell-label">Flight</span>
-          </div>
-        </div>
-
-        <div class="passenger-row">
-          <div class="p-cell">
-            <span class="p-value">Morgan, Alice</span>
-            <span class="p-label">Passenger</span>
-          </div>
-          <div class="p-cell">
-            <span class="p-value">22 years, Male</span>
-            <span class="p-label">Age</span>
-          </div>
-          <div class="p-cell">
-            <span class="p-value seat">17 D</span>
-            <span class="p-label">Seat</span>
-          </div>
-        </div>
-
-        <div class="ticket-note">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M12 7.6v5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <circle cx="12" cy="16.4" r="1.1" fill="currentColor"/>
+      <label class="field">
+        <span class="field-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8.4" r="3.6" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M5.6 19.4a6.5 6.5 0 0 1 12.8 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
           </svg>
-          <span>Arrive at the gate 30 min before departure.</span>
-        </div>
+        </span>
+        <input class="field-input" id="username" type="text" autocomplete="username" placeholder="Username or Email" />
+      </label>
 
-        <div class="perforation" aria-hidden="true"></div>
+      <label class="field">
+        <span class="field-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="10.2" width="14" height="9.3" rx="2.4" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M8.4 10.2V8a3.6 3.6 0 0 1 7.2 0v2.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <input class="field-input" id="password" type="password" autocomplete="new-password" placeholder="Password" />
+        <button class="field-eye" id="eyePwd" type="button" aria-label="Show password" aria-pressed="false"></button>
+      </label>
 
-        <div class="qr-block">
-          <div class="qr" id="qr" role="img" aria-label="Boarding QR code"></div>
-          <p class="qr-caption">Scan at the boarding gate</p>
-          <p class="qr-ref">Booking Ref TA-84721</p>
-        </div>
+      <label class="field" id="confirmField">
+        <span class="field-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="5" y="10.2" width="14" height="9.3" rx="2.4" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M8.4 10.2V8a3.6 3.6 0 0 1 7.2 0v2.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <input class="field-input" id="confirm" type="password" autocomplete="new-password" placeholder="Confirm Password" />
+        <button class="field-eye" id="eyeConfirm" type="button" aria-label="Show password" aria-pressed="false"></button>
+        <span class="field-error" id="confirmError" role="alert">Passwords do not match.</span>
+      </label>
 
+      <div class="signup-note">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3 5 6v5.5c0 4.4 2.9 8.2 7 9.5 4.1-1.3 7-5.1 7-9.5V6l-7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="m9.2 11.8 2 2 3.6-3.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Your details are protected with 256-bit encryption.</span>
       </div>
+
+      <button class="register-btn" id="registerBtn" type="button">REGISTER</button>
+
+      <div class="divider"><span>Or Continue with</span></div>
+
+      <div class="socials">
+        <button class="social" type="button" aria-label="Register with Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M14.6 8.6h2.2V5.6h-2.5c-2.3 0-3.8 1.5-3.8 3.8v1.7H8.3v3h2.2V21h3.2v-6.9h2.4l.5-3h-2.9V9.6c0-.7.3-1 1-1z"/>
+          </svg>
+        </button>
+        <button class="social" type="button" aria-label="Register with Apple">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M16.3 12.7c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2 2.6 2 1 0 1.4-.6 2.6-.6 1.2 0 1.6.6 2.6.6 1.1 0 1.8-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3 0 0-2.2-.9-2.2-3zM14.5 6.5c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.3.9.1 1.8-.4 2.3-1.1z"/>
+          </svg>
+        </button>
+        <button class="social" type="button" aria-label="Register with Google">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 6c1.6 0 2.9.6 3.8 1.5l1.7-1.6C16.2 4.6 14.5 4 12 4 8.7 4 6 6.7 6 10s2.7 6 6 6c3.5 0 5.8-2.4 5.8-5.9 0-.4 0-.7-.1-1.1H12v2.4h3.4c-.3 1.3-1.6 3-3.4 3-2 0-3.7-1.7-3.7-3.9S10 6 12 6z"/>
+          </svg>
+        </button>
+        <button class="social" type="button" aria-label="Register with X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.4 3h3.2l-7 8 7.3 10h-5.5l-4.3-6-4.9 6H3.1l7.4-8.6L3.4 3H9l4 5.6L17.4 3zm-1.1 16.2h1.7L7.3 4.7H5.4l10.9 14.5z"/>
+          </svg>
+        </button>
+      </div>
+
+      <p class="terms">By continuing you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+
     </section>
 
-    <div class="actions">
-      <button class="action-btn" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M7 9V4.6h10V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="3.5" y="9" width="17" height="7" rx="2" stroke="currentColor" stroke-width="1.8"/>
-          <rect x="6.5" y="14" width="11" height="6" rx="1.6" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-        PRINT
-      </button>
-      <button class="action-btn" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="3.5" y="5.5" width="17" height="13" rx="2.4" stroke="currentColor" stroke-width="1.8"/>
-          <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        E-MAIL
-      </button>
+    <div class="flourish" aria-hidden="true">
+      <svg viewBox="0 0 224 70" fill="none">
+        <path d="M8 54C50 14 150 8 194 40" stroke="#1A237E" stroke-opacity=".26" stroke-width="2" stroke-dasharray="6 8" stroke-linecap="round"/>
+        <g transform="translate(198 44) rotate(125)">
+          <path d="M21 15.5 13.5 12V5.2a1.6 1.6 0 0 0-3.2 0V12L3 15.5V17l7.3-2.1v3.6l-2.2 1.6v1.3l3.8-1.1 3.8 1.1v-1.3L13.5 18.5v-3.6L21 17z" fill="#4CAF50" opacity=".85" transform="translate(-12 -12)"/>
+        </g>
+        <g fill="#FFFFFF" opacity=".6">
+          <ellipse cx="52" cy="30" rx="18" ry="8"/>
+          <ellipse cx="66" cy="25" rx="11" ry="6"/>
+        </g>
+        <g fill="#1A237E" opacity=".2">
+          <circle cx="30" cy="60" r="2.5"/>
+          <circle cx="122" cy="18" r="2.5"/>
+          <circle cx="176" cy="64" r="2"/>
+        </g>
+      </svg>
     </div>
+
+    <p class="footer">I Already Have an Account? <a href="#">Login</a></p>
+
+    <div class="home-indicator"></div>
   </main>
 
 <script>
-  (function () {
-    const SIZE = 25;
-    const QUIET = 2;
-    const grid = [];
+  const EYE_OPEN = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.6 12S6.2 5.6 12 5.6 21.4 12 21.4 12 17.8 18.4 12 18.4 2.6 12 2.6 12z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" stroke="currentColor" stroke-width="1.7"/></svg>';
+  const EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.6 12S6.2 5.6 12 5.6 21.4 12 21.4 12 17.8 18.4 12 18.4 2.6 12 2.6 12z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" stroke="currentColor" stroke-width="1.7"/><path d="m4.8 4.8 14.4 14.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
 
-    for (let y = 0; y < SIZE; y++) {
-      grid.push(new Array(SIZE).fill(0));
+  function wireEye(btnId, inputId) {
+    const btn = document.getElementById(btnId);
+    const input = document.getElementById(inputId);
+
+    btn.innerHTML = EYE_OPEN;
+
+    btn.addEventListener("click", function () {
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      btn.innerHTML = show ? EYE_OFF : EYE_OPEN;
+      btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+      btn.setAttribute("aria-pressed", String(show));
+      input.focus();
+    });
+  }
+
+  wireEye("eyePwd", "password");
+  wireEye("eyeConfirm", "confirm");
+
+  const confirmField = document.getElementById("confirmField");
+  const confirmInput = document.getElementById("confirm");
+  const pwdInput = document.getElementById("password");
+  const registerBtn = document.getElementById("registerBtn");
+
+  registerBtn.addEventListener("click", function () {
+    if (registerBtn.dataset.busy === "1") return;
+
+    if (confirmInput.value !== pwdInput.value) {
+      confirmField.classList.add("has-error", "shake");
+      window.setTimeout(function () { confirmField.classList.remove("shake"); }, 320);
+      confirmInput.focus();
+      return;
     }
 
-    function finder(ox, oy) {
-      for (let y = -1; y <= 7; y++) {
-        for (let x = -1; x <= 7; x++) {
-          const gx = ox + x;
-          const gy = oy + y;
-          if (gx < 0 || gy < 0 || gx >= SIZE || gy >= SIZE) continue;
-          if (x < 0 || y < 0 || x > 6 || y > 6) { grid[gy][gx] = 0; continue; }
-          const edge = x === 0 || x === 6 || y === 0 || y === 6;
-          const core = x >= 2 && x <= 4 && y >= 2 && y <= 4;
-          grid[gy][gx] = (edge || core) ? 1 : 0;
-        }
-      }
-    }
+    registerBtn.dataset.busy = "1";
+    registerBtn.textContent = "CREATING ACCOUNT...";
+    window.setTimeout(function () {
+      registerBtn.textContent = "REGISTER";
+      registerBtn.dataset.busy = "0";
+    }, 1600);
+  });
 
-    finder(0, 0);
-    finder(SIZE - 7, 0);
-    finder(0, SIZE - 7);
-
-    for (let i = 8; i < SIZE - 8; i++) {
-      grid[6][i] = i % 2 === 0 ? 1 : 0;
-      grid[i][6] = i % 2 === 0 ? 1 : 0;
-    }
-
-    const ax = 18;
-    const ay = 18;
-
-    for (let y = -2; y <= 2; y++) {
-      for (let x = -2; x <= 2; x++) {
-        grid[ay + y][ax + x] = Math.max(Math.abs(x), Math.abs(y)) === 1 ? 0 : 1;
-      }
-    }
-
-    function reserved(x, y) {
-      if (x < 8 && y < 8) return true;
-      if (x >= SIZE - 8 && y < 8) return true;
-      if (x < 8 && y >= SIZE - 8) return true;
-      if (x === 6 || y === 6) return true;
-      if (Math.abs(x - ax) <= 2 && Math.abs(y - ay) <= 2) return true;
-      return false;
-    }
-
-    let seed = 20260925;
-
-    function rnd() {
-      seed = (seed * 1103515245 + 12345) % 2147483648;
-      return seed / 2147483648;
-    }
-
-    let path = "";
-    for (let y = 0; y < SIZE; y++) {
-      for (let x = 0; x < SIZE; x++) {
-        if (!reserved(x, y)) grid[y][x] = rnd() > 0.5 ? 1 : 0;
-        if (grid[y][x]) path += "M" + (x + QUIET) + " " + (y + QUIET) + "h1v1h-1z";
-      }
-    }
-
-    const dim = SIZE + QUIET * 2;
-    document.getElementById("qr").innerHTML =
-      '<svg viewBox="0 0 ' + dim + ' ' + dim + '" shape-rendering="crispEdges" aria-hidden="true">' +
-      '<rect width="' + dim + '" height="' + dim + '" fill="#FFFFFF"/>' +
-      '<path d="' + path + '" fill="#1A237E"/>' +
-      "</svg>";
-  })();
+  [pwdInput, confirmInput].forEach(function (field) {
+    field.addEventListener("input", function () { confirmField.classList.remove("has-error"); });
+  });
 </script>
 </body>
 </html>
