@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Trip Australia - Payment Confirmation</title>
+<title>Trip Australia - E-Ticket</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,13 +18,13 @@
     --cream-ink: #8D6E00;
     --pink: #F8D7DA;
     --red: #D32F2F;
+    --gray-bar: #B0BEC5;
     --gray-card: #F4F5F7;
     --gray: #E0E0E0;
     --muted: #8B93A7;
     --line: #E4E7ED;
     --white: #FFFFFF;
-    --card-shadow: 0 6px 16px rgba(20,45,25,.10);
-    --soft-shadow: 0 2px 6px rgba(26,35,126,.05);
+    --card-shadow: 0 14px 30px rgba(20,45,25,.16);
   }
 
   html, body { margin: 0; padding: 0; }
@@ -44,6 +44,7 @@
     position: relative;
     width: 393px;
     height: 852px;
+    padding: 14px 18px 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -62,18 +63,10 @@
     pointer-events: none;
   }
 
-  .page {
-    position: relative;
-    z-index: 2;
-    flex: 1;
-    min-height: 0;
-    padding: 14px 18px 0;
-    display: flex;
-    flex-direction: column;
-  }
-
   /* header */
   .app-bar {
+    position: relative;
+    z-index: 2;
     flex: none;
     height: 46px;
     display: flex;
@@ -89,63 +82,61 @@
     padding-bottom: 2px;
   }
 
-  .back-btn {
+  .page-title {
+    position: relative;
+    z-index: 2;
     flex: none;
-    width: 40px; height: 40px;
-    padding: 0;
-    display: grid;
-    place-items: center;
-    border: 2px solid rgba(255,255,255,.9);
-    border-radius: 50%;
-    background: var(--green);
-    color: var(--white);
-    cursor: pointer;
-    box-shadow: 0 6px 14px rgba(30,90,40,.28);
-    transition: transform .18s ease, box-shadow .18s ease;
-  }
-
-  .back-btn svg { width: 18px; height: 18px; }
-  .back-btn:hover { transform: translateY(-1px); box-shadow: 0 9px 18px rgba(30,90,40,.34); }
-  .back-btn:active { transform: scale(.93); }
-  .back-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.6), 0 6px 14px rgba(30,90,40,.28); }
-
-  /* page title */
-  .title-card {
-    flex: none;
-    margin-top: 10px;
-    height: 54px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    background: var(--white);
-    box-shadow: var(--card-shadow);
-  }
-
-  .title {
-    margin: 0;
-    font-size: 24px;
+    margin: 2px 0 0;
+    font-size: 36px;
     font-weight: 700;
-    letter-spacing: -.4px;
+    line-height: 1.25;
+    letter-spacing: -.6px;
+    text-align: center;
     color: var(--navy);
   }
 
-  /* main grey card */
-  .main-card {
+  /* ticket card */
+  .ticket {
     position: relative;
-    flex: 1;
-    min-height: 0;
+    z-index: 2;
+    flex: none;
+    align-self: center;
+    width: 353px;
+    height: 620px;
     margin-top: 12px;
-    margin-bottom: 12px;
-    padding: 18px;
     display: flex;
     flex-direction: column;
-    border-radius: 22px;
-    background: var(--gray-card);
+    overflow: hidden;
+    border-radius: 24px;
+    background: var(--white);
     box-shadow: var(--card-shadow);
+    --cut: 11px;
+    --cut-y: 310px;
+    -webkit-mask-image:
+      radial-gradient(circle var(--cut) at 0 var(--cut-y), transparent 98%, #000 100%),
+      radial-gradient(circle var(--cut) at 100% var(--cut-y), transparent 98%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      radial-gradient(circle var(--cut) at 0 var(--cut-y), transparent 98%, #000 100%),
+      radial-gradient(circle var(--cut) at 100% var(--cut-y), transparent 98%, #000 100%);
+    mask-composite: intersect;
   }
 
-  /* flight summary bar */
+  .top-bar {
+    flex: none;
+    height: 10px;
+    background: var(--gray-bar);
+  }
+
+  .ticket-body {
+    flex: 1;
+    min-height: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* pink flight summary */
   .flight-bar {
     flex: none;
     height: 92px;
@@ -158,7 +149,6 @@
   }
 
   .fb-row { display: flex; align-items: center; gap: 10px; }
-
   .fb-point { display: flex; flex-direction: column; gap: 2px; }
   .fb-point.right { align-items: flex-end; text-align: right; }
 
@@ -170,155 +160,71 @@
     color: var(--red);
   }
 
-  .fb-code {
-    font-size: 9.5px;
-    font-weight: 600;
-    letter-spacing: .12em;
-    color: rgba(211,47,47,.72);
-  }
+  .fb-code { font-size: 9.5px; font-weight: 600; letter-spacing: .12em; color: rgba(211,47,47,.72); }
 
   .fb-mid { flex: 1; display: flex; align-items: center; gap: 5px; }
   .fb-mid .dash { flex: 1; height: 1.5px; border-radius: 2px; background: repeating-linear-gradient(90deg, rgba(211,47,47,.55) 0 4px, transparent 4px 8px); }
   .fb-mid svg { flex: none; width: 14px; height: 14px; color: rgba(211,47,47,.75); transform: rotate(90deg); }
 
-  .fb-meta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10px;
-    font-weight: 500;
-    color: #A9505A;
-  }
-
+  .fb-meta { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; color: #A9505A; }
   .fb-meta .sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(169,80,90,.6); }
 
-  /* total fare */
-  .fare-row {
+  /* flight details */
+  .details-panel {
     flex: none;
+    height: 56px;
     margin-top: 14px;
-    padding-bottom: 12px;
-    display: flex;
+    padding: 0 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
-    justify-content: space-between;
+    border-radius: 14px;
+    background: var(--gray-card);
+  }
+
+  .cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .cell + .cell { padding-left: 10px; border-left: 1px solid rgba(176,190,197,.45); }
+
+  .cell-value {
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -.2px;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .cell-label {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* passenger details */
+  .passenger-row {
+    flex: none;
+    height: 50px;
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1.35fr 1.15fr .8fr;
+    align-items: center;
+    border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
 
-  .fare-label { font-size: 12.5px; font-weight: 600; color: var(--navy); }
-  .fare-value { font-size: 20px; font-weight: 700; letter-spacing: -.4px; color: var(--navy); }
+  .p-cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding-right: 8px; }
+  .p-value { font-size: 12.5px; font-weight: 600; line-height: 1.15; color: var(--navy); white-space: nowrap; }
+  .p-value.seat { font-weight: 700; color: var(--green-deep); }
+  .p-label { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 
-  /* payment methods */
-  .section-title {
+  /* cream notice */
+  .ticket-note {
     flex: none;
-    margin-top: 14px;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--navy);
-  }
-
-  .pay-list { flex: none; margin-top: 10px; display: flex; flex-direction: column; gap: 12px; }
-
-  .pay-option {
-    position: relative;
-    height: 80px;
-    padding: 0 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-radius: 16px;
-    background: var(--white);
-    border: 1.5px solid transparent;
-    box-shadow: var(--soft-shadow);
-    cursor: pointer;
-    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
-  }
-
-  .pay-option:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(26,35,126,.10); }
-
-  .pay-option.is-selected {
-    border-color: var(--green);
-    box-shadow: 0 8px 18px rgba(76,175,80,.20);
-  }
-
-  .pay-option input {
-    position: absolute;
-    width: 1px; height: 1px;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .pay-logo {
-    flex: none;
-    width: 46px; height: 30px;
-    display: grid;
-    place-items: center;
-    border-radius: 8px;
-    background: var(--white);
-    border: 1px solid #E8EBF1;
-    color: var(--navy);
-  }
-
-  .logo-visa { font-size: 11px; font-weight: 700; font-style: italic; letter-spacing: -.3px; }
-  .logo-paypal { font-size: 8.5px; font-weight: 700; letter-spacing: -.2px; }
-  .logo-mc { position: relative; width: 26px; height: 16px; }
-  .logo-mc span { position: absolute; top: 0; width: 16px; height: 16px; border-radius: 50%; }
-  .logo-mc span:first-child { left: 0; background: var(--red); }
-  .logo-mc span:last-child { right: 0; background: #F0A63C; opacity: .85; }
-
-  .pay-info { flex: 1; display: flex; flex-direction: column; gap: 3px; }
-  .pay-name { font-size: 12px; font-weight: 600; color: var(--navy); }
-  .pay-num { font-size: 10.5px; font-weight: 500; letter-spacing: .04em; color: var(--muted); }
-
-  .pay-radio {
-    flex: none;
-    width: 20px; height: 20px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    border: 2px solid #C9CFDA;
-    background: var(--white);
-    transition: border-color .18s ease, background-color .18s ease;
-  }
-
-  .pay-radio::after {
-    content: "";
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--white);
-    transform: scale(0);
-    transition: transform .18s ease;
-  }
-
-  .pay-option.is-selected .pay-radio { border-color: var(--green); background: var(--green); }
-  .pay-option.is-selected .pay-radio::after { transform: scale(1); }
-
-  .pay-option input:focus-visible ~ .pay-radio { box-shadow: 0 0 0 3px rgba(76,175,80,.35); }
-
-  /* continue button + secure note */
-  .pay-actions { flex: none; margin-top: auto; display: flex; flex-direction: column; align-items: center; }
-
-  .continue-btn {
-    width: 313px;
-    height: 56px;
-    border: 0;
-    border-radius: 28px;
-    font-family: inherit;
-    font-size: 14.5px;
-    font-weight: 600;
-    letter-spacing: .2px;
-    color: var(--white);
-    cursor: pointer;
-    background: var(--green);
-    box-shadow: 0 10px 22px rgba(76,175,80,.38);
-    transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
-  }
-
-  .continue-btn:hover { background: #43A047; transform: translateY(-1px); box-shadow: 0 13px 26px rgba(76,175,80,.44); }
-  .continue-btn:active { transform: scale(.98); box-shadow: 0 6px 14px rgba(76,175,80,.34); }
-  .continue-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 0 0 6px rgba(76,175,80,.6); }
-
-  .secure-note {
+    height: 36px;
     margin-top: 12px;
-    padding: 8px 12px;
+    padding: 0 12px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -326,207 +232,99 @@
     background: var(--cream);
   }
 
-  .secure-note svg { flex: none; width: 13px; height: 13px; color: var(--cream-ink); }
+  .ticket-note svg { flex: none; width: 13px; height: 13px; color: var(--cream-ink); }
+  .ticket-note span { font-size: 10px; font-weight: 500; color: var(--cream-ink); }
 
-  .secure-note span {
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--cream-ink);
-  }
-
-  /* bottom navigation */
-  .bottom-nav {
+  /* perforation */
+  .perforation {
     position: relative;
-    z-index: 3;
     flex: none;
-    height: 74px;
-    padding: 8px 10px 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    background: var(--green);
-    box-shadow: 0 -6px 18px rgba(20,45,25,.16);
+    height: 24px;
+    margin-bottom: 12px;
   }
 
-  .tab {
+  .perforation::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 2px;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(90deg, #D8DFE8 0 6px, transparent 6px 12px);
+  }
+
+  /* QR */
+  .qr-block {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    padding: 0;
-    border: 0;
-    background: none;
-    font-family: inherit;
-    cursor: pointer;
-    color: rgba(255,255,255,.65);
-    transition: color .18s ease;
-  }
-
-  .tab svg { width: 22px; height: 22px; }
-
-  .tab span { font-size: 9px; font-weight: 500; letter-spacing: .1px; }
-
-  .tab:hover { color: rgba(255,255,255,.85); }
-
-  .tab.is-active { color: var(--white); }
-  .tab.is-active span { font-weight: 600; }
-
-  .tab.is-active svg {
-    padding: 5px 12px;
-    border-radius: 12px;
-    background: rgba(255,255,255,.20);
-    box-sizing: content-box;
-    margin: -5px 0;
-  }
-
-  .tab:focus-visible { outline: none; }
-
-  .tab:focus-visible svg {
-    border-radius: 12px;
-    box-shadow: 0 0 0 2px rgba(255,255,255,.8);
-  }
-
-  .nav-home-bar {
-    position: absolute;
-    left: 50%;
-    bottom: 8px;
-    transform: translateX(-50%);
-    width: 126px; height: 5px;
-    border-radius: 99px;
-    background: rgba(255,255,255,.72);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .pay-option, .continue-btn, .tab, .back-btn { transition: none; }
-  }
-
-  /* success modal overlay */
-  .overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    display: grid;
-    place-items: center;
-    background: rgba(17,42,20,.26);
-    animation: fadeIn .3s ease-out;
-  }
-
-  .modal {
-    position: relative;
-    width: 320px;
-    height: 360px;
-    padding: 22px 24px;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 24px;
-    background: var(--white);
-    box-shadow: 0 26px 54px rgba(15,45,20,.34);
-    animation: popIn .4s cubic-bezier(.2,.9,.3,1.25);
+    gap: 9px;
   }
 
-  .overlay.is-hidden { opacity: 0; pointer-events: none; transition: opacity .26s ease; }
-  .overlay.is-hidden .modal { transform: scale(.94); transition: transform .26s ease; }
+  .qr { flex: none; width: 180px; height: 180px; }
+  .qr svg { display: block; width: 100%; height: 100%; }
 
-  .badge-stage {
+  .qr-caption { margin: 0; font-size: 10px; font-weight: 500; color: var(--muted); }
+  .qr-ref { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .02em; color: var(--navy); }
+
+  /* bottom actions */
+  .actions {
     position: relative;
+    z-index: 2;
     flex: none;
-    width: 190px; height: 132px;
-    display: grid;
-    place-items: center;
-  }
-
-  .badge-stage::before {
-    content: "";
-    position: absolute;
-    width: 118px; height: 118px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(179,212,240,.55) 0%, rgba(179,212,240,0) 70%);
-  }
-
-  .ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 1.5px solid rgba(179,212,240,.9);
-  }
-
-  .ring.r1 { width: 128px; height: 128px; }
-  .ring.r2 { width: 158px; height: 158px; border-color: rgba(179,212,240,.5); }
-
-  .blob { position: absolute; border-radius: 50%; background: #B3D4F0; }
-  .blob.b1 { width: 16px; height: 16px; left: 15px; top: 22px; opacity: .85; }
-  .blob.b2 { width: 10px; height: 10px; right: 22px; top: 10px; opacity: .7; }
-  .blob.b3 { width: 24px; height: 24px; right: 6px; bottom: 16px; opacity: .45; }
-  .blob.b4 { width: 12px; height: 12px; left: 34px; bottom: 4px; opacity: .6; }
-
-  .badge { position: relative; width: 100px; height: 100px; }
-  .badge svg { display: block; width: 100%; height: 100%; }
-
-  .modal-title {
-    flex: none;
-    margin: 14px 0 0;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: -.2px;
-    text-align: center;
-    color: var(--navy);
-  }
-
-  .modal-text {
-    flex: none;
-    margin: 6px 0 0;
-    max-width: 232px;
-    font-size: 10.5px;
-    font-weight: 400;
-    line-height: 1.4;
-    text-align: center;
-    color: var(--muted);
-  }
-
-  .receipt {
-    flex: none;
-    width: 100%;
+    align-self: center;
+    width: 353px;
     margin-top: 14px;
-    padding: 11px 14px;
     display: flex;
-    flex-direction: column;
-    gap: 7px;
-    border-radius: 14px;
-    background: var(--gray-card);
+    gap: 13px;
   }
 
-  .receipt-row { display: flex; align-items: center; justify-content: space-between; }
-  .r-label { font-size: 10.5px; font-weight: 500; color: var(--muted); }
-  .r-value { font-size: 11px; font-weight: 600; letter-spacing: .01em; color: var(--navy); }
-  .r-value.accent { font-size: 12.5px; font-weight: 700; color: var(--green-deep); }
+  .action-btn {
+    flex: 1;
+    height: 56px;
+    border: 0;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    color: var(--white);
+    cursor: pointer;
+    background: var(--green);
+    box-shadow: 0 10px 22px rgba(76,175,80,.34);
+    transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
+  }
 
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes popIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+  .action-btn svg { width: 17px; height: 17px; }
+  .action-btn:hover { background: #43A047; transform: translateY(-1px); box-shadow: 0 13px 26px rgba(76,175,80,.42); }
+  .action-btn:active { transform: scale(.98); box-shadow: 0 6px 14px rgba(76,175,80,.30); }
+  .action-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 0 0 6px rgba(76,175,80,.6); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .action-btn { transition: none; }
+  }
 </style>
 </head>
 <body>
-  <main class="screen" aria-label="Trip Australia payment confirmation screen">
+  <main class="screen" aria-label="Trip Australia e-ticket screen">
 
-    <div class="page">
+    <header class="app-bar">
+      <div class="brand">Trip Australia</div>
+    </header>
 
-      <header class="app-bar">
-        <div class="brand">Trip Australia</div>
-        <button class="back-btn" type="button" aria-label="Go back">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </header>
+    <h1 class="page-title">E-Ticket</h1>
 
-      <section class="title-card">
-        <h1 class="title">Payment</h1>
-      </section>
+    <section class="ticket" aria-label="Boarding pass">
+      <span class="top-bar" aria-hidden="true"></span>
 
-      <section class="main-card">
+      <div class="ticket-body">
 
         <div class="flight-bar">
           <div class="fb-row">
@@ -549,177 +347,152 @@
           <div class="fb-meta">1 hr 35 min<span class="sep"></span>Virgin Australia</div>
         </div>
 
-        <div class="fare-row">
-          <span class="fare-label">Total Fare</span>
-          <span class="fare-value">A$247</span>
-        </div>
-
-        <h2 class="section-title">Payment Methods</h2>
-
-        <div class="pay-list">
-
-          <label class="pay-option is-selected">
-            <input type="radio" name="payment" value="visa" checked />
-            <span class="pay-logo"><span class="logo-visa">VISA</span></span>
-            <span class="pay-info">
-              <span class="pay-name">VISA</span>
-              <span class="pay-num">********0017</span>
-            </span>
-            <span class="pay-radio" aria-hidden="true"></span>
-          </label>
-
-          <label class="pay-option">
-            <input type="radio" name="payment" value="paypal" />
-            <span class="pay-logo"><span class="logo-paypal">PayPal</span></span>
-            <span class="pay-info">
-              <span class="pay-name">PayPal</span>
-              <span class="pay-num">********0017</span>
-            </span>
-            <span class="pay-radio" aria-hidden="true"></span>
-          </label>
-
-          <label class="pay-option">
-            <input type="radio" name="payment" value="mastercard" />
-            <span class="pay-logo"><span class="logo-mc"><span></span><span></span></span></span>
-            <span class="pay-info">
-              <span class="pay-name">Mastercard</span>
-              <span class="pay-num">********0017</span>
-            </span>
-            <span class="pay-radio" aria-hidden="true"></span>
-          </label>
-
-        </div>
-
-        <div class="pay-actions">
-          <button class="continue-btn" type="button" id="continueBtn">Continue</button>
-          <div class="secure-note">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 3 5 6v5.5c0 4.4 2.9 8.2 7 9.5 4.1-1.3 7-5.1 7-9.5V6l-7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-              <path d="m9.2 11.8 2 2 3.6-3.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span>Payments are encrypted and secured by Trip Australia.</span>
+        <div class="details-panel">
+          <div class="cell">
+            <span class="cell-value">Economy</span>
+            <span class="cell-label">Class</span>
+          </div>
+          <div class="cell">
+            <span class="cell-value">4</span>
+            <span class="cell-label">Gate</span>
+          </div>
+          <div class="cell">
+            <span class="cell-value">3</span>
+            <span class="cell-label">Terminal</span>
+          </div>
+          <div class="cell">
+            <span class="cell-value">VH-IJQ</span>
+            <span class="cell-label">Flight</span>
           </div>
         </div>
 
-      </section>
-    </div>
-    <nav class="bottom-nav" aria-label="Main navigation">
-      <button class="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 10.8 12 4l8 6.8V19a1.2 1.2 0 0 1-1.2 1.2H15v-5.4H9v5.4H5.2A1.2 1.2 0 0 1 4 19v-8.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-        </svg>
-        <span>Home</span>
-      </button>
-
-      <button class="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8"/>
-          <path d="m15.6 15.6 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-        <span>Flights</span>
-      </button>
-
-      <button class="tab is-active" type="button" aria-current="page">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 8.6A2.6 2.6 0 0 1 6.6 6h10.8A2.6 2.6 0 0 1 20 8.6v1.1a2.3 2.3 0 0 0 0 4.6v1.1A2.6 2.6 0 0 1 17.4 18H6.6A2.6 2.6 0 0 1 4 15.4v-1.1a2.3 2.3 0 0 0 0-4.6V8.6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="1.6 2.4"/>
-        </svg>
-        <span>Booking</span>
-      </button>
-
-      <button class="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="4" y="7.4" width="16" height="11.6" rx="2.4" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M9 7.4V5.6A1.6 1.6 0 0 1 10.6 4h2.8A1.6 1.6 0 0 1 15 5.6v1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M9.4 11.6v4M14.6 11.6v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        <span>Trips</span>
-      </button>
-
-      <button class="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="8.6" r="3.6" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M5.6 19.6a6.5 6.5 0 0 1 12.8 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-        <span>Profile</span>
-      </button>
-
-      <span class="nav-home-bar" aria-hidden="true"></span>
-    </nav>
-
-    <div class="overlay" id="overlay">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalText">
-        <div class="badge-stage" aria-hidden="true">
-          <span class="ring r1"></span>
-          <span class="ring r2"></span>
-          <span class="blob b1"></span>
-          <span class="blob b2"></span>
-          <span class="blob b3"></span>
-          <span class="blob b4"></span>
-          <div class="badge">
-            <svg viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="42" fill="#1E5AA8" stroke="#1E5AA8" stroke-width="16" stroke-linecap="round" stroke-dasharray="0 17.6"/>
-              <path d="M32.5 51.5 44 63.5 68 38" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="passenger-row">
+          <div class="p-cell">
+            <span class="p-value">Morgan, Alice</span>
+            <span class="p-label">Passenger</span>
+          </div>
+          <div class="p-cell">
+            <span class="p-value">22 years, Male</span>
+            <span class="p-label">Age</span>
+          </div>
+          <div class="p-cell">
+            <span class="p-value seat">17 D</span>
+            <span class="p-label">Seat</span>
           </div>
         </div>
 
-        <h2 class="modal-title" id="modalTitle">Payment done successfully.</h2>
-        <p class="modal-text" id="modalText">Your seat is confirmed and a receipt has been sent to your email.</p>
-
-        <div class="receipt">
-          <div class="receipt-row"><span class="r-label">Amount Paid</span><span class="r-value accent">A$247</span></div>
-          <div class="receipt-row"><span class="r-label">Payment Method</span><span class="r-value">VISA ********0017</span></div>
-          <div class="receipt-row"><span class="r-label">Booking Ref</span><span class="r-value">TA-84721</span></div>
+        <div class="ticket-note">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M12 7.6v5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="12" cy="16.4" r="1.1" fill="currentColor"/>
+          </svg>
+          <span>Arrive at the gate 30 min before departure.</span>
         </div>
+
+        <div class="perforation" aria-hidden="true"></div>
+
+        <div class="qr-block">
+          <div class="qr" id="qr" role="img" aria-label="Boarding QR code"></div>
+          <p class="qr-caption">Scan at the boarding gate</p>
+          <p class="qr-ref">Booking Ref TA-84721</p>
+        </div>
+
       </div>
-    </div>  </main>
+    </section>
+
+    <div class="actions">
+      <button class="action-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 9V4.6h10V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="3.5" y="9" width="17" height="7" rx="2" stroke="currentColor" stroke-width="1.8"/>
+          <rect x="6.5" y="14" width="11" height="6" rx="1.6" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+        PRINT
+      </button>
+      <button class="action-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3.5" y="5.5" width="17" height="13" rx="2.4" stroke="currentColor" stroke-width="1.8"/>
+          <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        E-MAIL
+      </button>
+    </div>
+  </main>
 
 <script>
-  const payOptions = Array.prototype.slice.call(document.querySelectorAll(".pay-option"));
+  (function () {
+    const SIZE = 25;
+    const QUIET = 2;
+    const grid = [];
 
-  function syncPayment() {
-    payOptions.forEach(function (option) {
-      const input = option.querySelector("input");
-      option.classList.toggle("is-selected", input.checked);
-    });
-  }
+    for (let y = 0; y < SIZE; y++) {
+      grid.push(new Array(SIZE).fill(0));
+    }
 
-  payOptions.forEach(function (option) {
-    option.querySelector("input").addEventListener("change", syncPayment);
-  });
+    function finder(ox, oy) {
+      for (let y = -1; y <= 7; y++) {
+        for (let x = -1; x <= 7; x++) {
+          const gx = ox + x;
+          const gy = oy + y;
+          if (gx < 0 || gy < 0 || gx >= SIZE || gy >= SIZE) continue;
+          if (x < 0 || y < 0 || x > 6 || y > 6) { grid[gy][gx] = 0; continue; }
+          const edge = x === 0 || x === 6 || y === 0 || y === 6;
+          const core = x >= 2 && x <= 4 && y >= 2 && y <= 4;
+          grid[gy][gx] = (edge || core) ? 1 : 0;
+        }
+      }
+    }
 
-  const tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+    finder(0, 0);
+    finder(SIZE - 7, 0);
+    finder(0, SIZE - 7);
 
-  tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      tabs.forEach(function (other) {
-        other.classList.remove("is-active");
-        other.removeAttribute("aria-current");
-      });
-      tab.classList.add("is-active");
-      tab.setAttribute("aria-current", "page");
-    });
-  });
+    for (let i = 8; i < SIZE - 8; i++) {
+      grid[6][i] = i % 2 === 0 ? 1 : 0;
+      grid[i][6] = i % 2 === 0 ? 1 : 0;
+    }
 
-  syncPayment();
+    const ax = 18;
+    const ay = 18;
 
+    for (let y = -2; y <= 2; y++) {
+      for (let x = -2; x <= 2; x++) {
+        grid[ay + y][ax + x] = Math.max(Math.abs(x), Math.abs(y)) === 1 ? 0 : 1;
+      }
+    }
 
-  /* success modal */
-  const overlay = document.getElementById("overlay");
-  const modalBox = overlay.querySelector(".modal");
+    function reserved(x, y) {
+      if (x < 8 && y < 8) return true;
+      if (x >= SIZE - 8 && y < 8) return true;
+      if (x < 8 && y >= SIZE - 8) return true;
+      if (x === 6 || y === 6) return true;
+      if (Math.abs(x - ax) <= 2 && Math.abs(y - ay) <= 2) return true;
+      return false;
+    }
 
-  function dismissModal() {
-    if (overlay.classList.contains("is-hidden")) return;
-    overlay.classList.add("is-hidden");
-    window.setTimeout(function () { overlay.style.display = "none"; }, 280);
-  }
+    let seed = 20260925;
 
-  overlay.addEventListener("click", dismissModal);
-  modalBox.addEventListener("click", function (event) { event.stopPropagation(); });
+    function rnd() {
+      seed = (seed * 1103515245 + 12345) % 2147483648;
+      return seed / 2147483648;
+    }
 
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") dismissModal();
-  });</script>
+    let path = "";
+    for (let y = 0; y < SIZE; y++) {
+      for (let x = 0; x < SIZE; x++) {
+        if (!reserved(x, y)) grid[y][x] = rnd() > 0.5 ? 1 : 0;
+        if (grid[y][x]) path += "M" + (x + QUIET) + " " + (y + QUIET) + "h1v1h-1z";
+      }
+    }
+
+    const dim = SIZE + QUIET * 2;
+    document.getElementById("qr").innerHTML =
+      '<svg viewBox="0 0 ' + dim + ' ' + dim + '" shape-rendering="crispEdges" aria-hidden="true">' +
+      '<rect width="' + dim + '" height="' + dim + '" fill="#FFFFFF"/>' +
+      '<path d="' + path + '" fill="#1A237E"/>' +
+      "</svg>";
+  })();
+</script>
 </body>
 </html>
