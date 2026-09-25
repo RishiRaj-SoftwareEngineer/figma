@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Trip Australia - Create an Account</title>
+<title>Trip Australia - Login</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -15,11 +15,8 @@
     --green-deep: #2E7D32;
     --navy: #1A237E;
     --cream: #FFF9C4;
-    --cream-ink: #8D6E00;
-    --line: #E6EAEF;
-    --alert: #D32F2F;
+    --gray-text: #9E9E9E;
     --white: #FFFFFF;
-    --card-shadow: 0 18px 38px rgba(20,45,25,.18), 0 2px 6px rgba(20,45,25,.05);
   }
 
   html, body { margin: 0; padding: 0; }
@@ -39,22 +36,32 @@
     position: relative;
     width: 393px;
     height: 852px;
-    padding: 14px 18px 0;
+    padding: 16px 26px 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     border-radius: 40px;
-    background: linear-gradient(178deg, #6FC474 0%, #8BCA80 30%, #B6D783 62%, #DCE9A0 88%, #E9EEB2 100%);
+    background: linear-gradient(180deg, #4CAF50 0%, #7CC46B 34%, #C6D98A 66%, #FFF9C4 100%);
     box-shadow: 0 34px 70px -26px rgba(28,60,32,.45), 0 0 0 1px rgba(20,45,25,.10);
   }
 
   .screen::before {
     content: "";
     position: absolute;
-    top: -150px; right: -120px;
+    top: -150px; right: -130px;
+    width: 330px; height: 330px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.26) 0%, rgba(255,255,255,0) 68%);
+    pointer-events: none;
+  }
+
+  .screen::after {
+    content: "";
+    position: absolute;
+    left: -140px; bottom: -160px;
     width: 320px; height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 68%);
+    background: radial-gradient(circle, rgba(255,255,255,.4) 0%, rgba(255,255,255,0) 70%);
     pointer-events: none;
   }
 
@@ -83,7 +90,7 @@
     padding: 0;
     display: grid;
     place-items: center;
-    border: 2px solid rgba(255,255,255,.9);
+    border: 2px solid rgba(255,255,255,.92);
     border-radius: 50%;
     background: var(--green);
     color: var(--white);
@@ -95,14 +102,14 @@
   .back-btn svg { width: 18px; height: 18px; }
   .back-btn:hover { transform: translateY(-1px); box-shadow: 0 9px 18px rgba(30,90,40,.34); }
   .back-btn:active { transform: scale(.93); }
-  .back-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.6), 0 6px 14px rgba(30,90,40,.28); }
+  .back-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.7), 0 6px 14px rgba(30,90,40,.28); }
 
   /* heading */
   .page-title {
     position: relative;
     z-index: 2;
     flex: none;
-    margin: 8px 0 0;
+    margin: 12px 0 0;
     font-size: 32px;
     font-weight: 700;
     line-height: 1.2;
@@ -115,38 +122,27 @@
     position: relative;
     z-index: 2;
     flex: none;
-    margin: 6px 0 0;
-    padding: 0 12px;
+    margin: 8px 0 0;
     font-size: 11.5px;
     font-weight: 400;
-    line-height: 1.45;
+    line-height: 1.5;
     text-align: center;
     color: rgba(26,35,126,.72);
   }
 
-  /* card */
-  .card {
-    position: relative;
-    z-index: 2;
-    flex: none;
-    margin-top: 16px;
-    padding: 24px;
-    border-radius: 24px;
-    background: var(--white);
-    box-shadow: var(--card-shadow);
-  }
-
   /* fields */
-  .field { position: relative; display: block; margin-top: 14px; }
-  .field:first-of-type { margin-top: 0; }
+  .form { position: relative; z-index: 2; flex: none; margin-top: 28px; }
+
+  .field { position: relative; display: block; }
+  .field + .field { margin-top: 14px; }
 
   .field-icon {
     position: absolute;
-    left: 16px; top: 50%;
+    left: 17px; top: 50%;
     transform: translateY(-50%);
     display: grid;
     place-items: center;
-    color: rgba(26,35,126,.42);
+    color: var(--gray-text);
     pointer-events: none;
     transition: color .18s ease;
   }
@@ -155,27 +151,27 @@
 
   .field-input {
     width: 100%;
-    height: 56px;
-    padding: 0 48px;
-    border: 1.5px solid var(--line);
-    border-radius: 15px;
+    height: 58px;
+    padding: 0 50px;
+    border: 1.5px solid rgba(255,255,255,.85);
+    border-radius: 16px;
     background: var(--white);
     font-family: inherit;
     font-size: 12.5px;
     font-weight: 500;
     color: var(--navy);
     outline: none;
+    box-shadow: 0 8px 18px rgba(20,60,25,.12);
     transition: border-color .18s ease, box-shadow .18s ease;
   }
 
-  .field-input::placeholder { color: rgba(26,35,126,.42); font-weight: 400; }
-  .field-input:hover { border-color: #D5DCE4; }
-  .field-input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(76,175,80,.16); }
-  .field:focus-within .field-icon { color: var(--green); }
+  .field-input::placeholder { color: var(--gray-text); font-weight: 400; }
+  .field-input:focus { border-color: var(--green-deep); box-shadow: 0 0 0 3px rgba(46,125,50,.22), 0 8px 18px rgba(20,60,25,.12); }
+  .field:focus-within .field-icon { color: var(--green-deep); }
 
   .field-eye {
     position: absolute;
-    right: 9px; top: 50%;
+    right: 10px; top: 50%;
     transform: translateY(-50%);
     width: 38px; height: 38px;
     display: grid;
@@ -183,113 +179,101 @@
     border: 0;
     border-radius: 11px;
     background: none;
-    color: rgba(26,35,126,.42);
+    color: var(--gray-text);
     cursor: pointer;
     transition: color .18s ease, background-color .18s ease;
   }
 
   .field-eye svg { width: 18px; height: 18px; }
   .field-eye:hover { color: var(--navy); background: #F2F5F8; }
-  .field-eye:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(76,175,80,.3); }
+  .field-eye:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(46,125,50,.3); }
 
-  .field-error {
-    margin: 6px 0 0 4px;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--alert);
-    display: none;
-  }
-
-  .field.has-error .field-input,
-  .field.has-error .field-input:focus { border-color: var(--alert); box-shadow: 0 0 0 3px rgba(211,47,47,.14); }
-  .field.has-error .field-error { display: block; }
-
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
-  }
-
-  .field.shake { animation: shake .28s ease-in-out; }
-
-  /* cream note */
-  .signup-note {
-    height: 36px;
-    margin-top: 16px;
-    padding: 0 12px;
+  /* login button + forgot */
+  .actions {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    margin-top: 22px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    border-radius: 12px;
-    background: var(--cream);
   }
 
-  .signup-note svg { flex: none; width: 13px; height: 13px; color: var(--cream-ink); }
-  .signup-note span { font-size: 10px; font-weight: 500; color: var(--cream-ink); }
-
-  /* register button */
-  .register-btn {
-    width: 100%;
+  .login-btn {
+    width: 340px;
     height: 56px;
-    margin-top: 18px;
     border: 0;
     border-radius: 28px;
     font-family: inherit;
-    font-size: 13.5px;
-    font-weight: 700;
-    letter-spacing: .14em;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: .3px;
     color: var(--white);
     cursor: pointer;
     background: var(--green);
-    box-shadow: 0 10px 22px rgba(76,175,80,.34);
+    box-shadow: 0 12px 24px rgba(40,110,45,.34);
     transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
   }
 
-  .register-btn:hover { background: #43A047; transform: translateY(-1px); box-shadow: 0 14px 26px rgba(76,175,80,.42); }
-  .register-btn:active { transform: scale(.98); box-shadow: 0 6px 14px rgba(76,175,80,.30); }
-  .register-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.9), 0 0 0 6px rgba(76,175,80,.6); }
+  .login-btn:hover { background: #43A047; transform: translateY(-1px); box-shadow: 0 15px 28px rgba(40,110,45,.42); }
+  .login-btn:active { transform: scale(.98); box-shadow: 0 7px 16px rgba(40,110,45,.3); }
+  .login-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 0 0 6px rgba(76,175,80,.6); }
+  .login-btn.is-busy { opacity: .78; cursor: default; transform: none; }
+
+  .forgot {
+    margin-top: 12px;
+    align-self: flex-end;
+    margin-right: 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--navy);
+    text-decoration: none;
+  }
+
+  .forgot:hover { text-decoration: underline; }
+  .forgot:focus-visible { outline: none; border-radius: 6px; box-shadow: 0 0 0 3px rgba(76,175,80,.3); }
 
   /* divider */
-  .divider { margin-top: 20px; display: flex; align-items: center; gap: 12px; }
-  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-  .divider span { font-size: 11px; font-weight: 500; color: rgba(26,35,126,.5); white-space: nowrap; }
+  .divider {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: rgba(26,35,126,.22); }
+  .divider span { font-size: 11px; font-weight: 500; color: rgba(26,35,126,.6); white-space: nowrap; }
 
   /* socials */
-  .socials { margin-top: 16px; display: flex; justify-content: space-between; }
+  .socials {
+    position: relative;
+    z-index: 2;
+    flex: none;
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+  }
 
   .social {
     width: 56px; height: 56px;
     display: grid;
     place-items: center;
-    border: 1.5px solid var(--line);
+    border: 1.5px solid rgba(255,255,255,.9);
     border-radius: 50%;
     background: var(--white);
     color: var(--navy);
     cursor: pointer;
+    box-shadow: 0 8px 16px rgba(20,60,25,.12);
     transition: transform .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
   }
 
   .social svg { width: 20px; height: 20px; }
-  .social:hover { transform: translateY(-2px); border-color: rgba(76,175,80,.55); color: var(--green); box-shadow: 0 8px 16px rgba(76,175,80,.16); }
+  .social:hover { transform: translateY(-2px); border-color: rgba(76,175,80,.6); color: var(--green); box-shadow: 0 10px 20px rgba(76,175,80,.22); }
   .social:active { transform: scale(.96); }
-  .social:focus-visible { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(76,175,80,.25); }
-
-  /* terms */
-  .terms {
-    margin: 16px 0 0;
-    font-size: 9.5px;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    color: rgba(26,35,126,.5);
-  }
-
-  .terms a { color: var(--navy); font-weight: 600; text-decoration: none; }
-  .terms a:hover { text-decoration: underline; }
-
-  /* travel flourish */
-  .flourish { position: relative; z-index: 2; flex: none; margin-top: 24px; display: grid; place-items: center; }
-  .flourish svg { display: block; width: 224px; height: auto; }
+  .social:focus-visible { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(76,175,80,.3); }
 
   /* footer */
   .footer {
@@ -297,7 +281,7 @@
     z-index: 2;
     flex: none;
     margin-top: auto;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-size: 11.5px;
     font-weight: 400;
     text-align: center;
@@ -306,7 +290,7 @@
 
   .footer a { font-weight: 700; color: var(--green-deep); text-decoration: none; }
   .footer a:hover { text-decoration: underline; }
-  .footer a:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(76,175,80,.3); border-radius: 6px; }
+  .footer a:focus-visible { outline: none; border-radius: 6px; box-shadow: 0 0 0 3px rgba(76,175,80,.3); }
 
   .home-indicator {
     flex: none;
@@ -314,17 +298,16 @@
     align-self: center;
     width: 126px; height: 5px;
     border-radius: 99px;
-    background: rgba(255,255,255,.72);
+    background: rgba(26,35,126,.28);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .register-btn, .social, .back-btn, .field-input, .field-eye { transition: none; }
-    .field.shake { animation: none; }
+    .login-btn, .social, .back-btn, .field-input, .field-eye { transition: none; }
   }
 </style>
-</head>
+
 <body>
-  <main class="screen" aria-label="Trip Australia create account screen">
+  <main class="screen" aria-label="Trip Australia login screen">
 
     <header class="app-bar">
       <div class="brand">Trip Australia</div>
@@ -335,102 +318,66 @@
       </button>
     </header>
 
-    <h1 class="page-title">Create an Account</h1>
-    <p class="page-sub">Join Trip Australia to book flights, choose your seat and carry your e-ticket.</p>
+    <h1 class="page-title">Welcome Back!</h1>
+    <p class="page-sub">Sign in to manage your bookings and fly with Trip Australia.</p>
 
-    <section class="card" aria-label="Registration form">
+    <form class="form" id="loginForm" novalidate>
 
-      <label class="field">
+      <label class="field" for="username">
         <span class="field-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="8.4" r="3.6" stroke="currentColor" stroke-width="1.7"/>
-            <path d="M5.6 19.4a6.5 6.5 0 0 1 12.8 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <circle cx="12" cy="8.4" r="3.7" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M5.4 19.6a6.6 6.6 0 0 1 13.2 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
         </span>
-        <input class="field-input" id="username" type="text" autocomplete="username" placeholder="Username or Email" />
+        <input class="field-input" id="username" name="username" type="text" autocomplete="username" placeholder="Username or Email" />
       </label>
 
-      <label class="field">
+      <label class="field" for="password">
         <span class="field-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">
-            <rect x="5" y="10.2" width="14" height="9.3" rx="2.4" stroke="currentColor" stroke-width="1.7"/>
-            <path d="M8.4 10.2V8a3.6 3.6 0 0 1 7.2 0v2.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <rect x="4.8" y="10.4" width="14.4" height="9.4" rx="2.4" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8.4 10.4V7.9a3.6 3.6 0 0 1 7.2 0v2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="12" cy="15.1" r="1.3" fill="currentColor"/>
           </svg>
         </span>
-        <input class="field-input" id="password" type="password" autocomplete="new-password" placeholder="Password" />
+        <input class="field-input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Password" />
         <button class="field-eye" id="eyePwd" type="button" aria-label="Show password" aria-pressed="false"></button>
       </label>
 
-      <label class="field" id="confirmField">
-        <span class="field-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect x="5" y="10.2" width="14" height="9.3" rx="2.4" stroke="currentColor" stroke-width="1.7"/>
-            <path d="M8.4 10.2V8a3.6 3.6 0 0 1 7.2 0v2.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <input class="field-input" id="confirm" type="password" autocomplete="new-password" placeholder="Confirm Password" />
-        <button class="field-eye" id="eyeConfirm" type="button" aria-label="Show password" aria-pressed="false"></button>
-        <span class="field-error" id="confirmError" role="alert">Passwords do not match.</span>
-      </label>
+    </form>
 
-      <div class="signup-note">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 3 5 6v5.5c0 4.4 2.9 8.2 7 9.5 4.1-1.3 7-5.1 7-9.5V6l-7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-          <path d="m9.2 11.8 2 2 3.6-3.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Your details are protected with 256-bit encryption.</span>
-      </div>
-
-      <button class="register-btn" id="registerBtn" type="button">REGISTER</button>
-
-      <div class="divider"><span>Or Continue with</span></div>
-
-      <div class="socials">
-        <button class="social" type="button" aria-label="Register with Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M14.6 8.6h2.2V5.6h-2.5c-2.3 0-3.8 1.5-3.8 3.8v1.7H8.3v3h2.2V21h3.2v-6.9h2.4l.5-3h-2.9V9.6c0-.7.3-1 1-1z"/>
-          </svg>
-        </button>
-        <button class="social" type="button" aria-label="Register with Apple">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M16.3 12.7c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2 2.6 2 1 0 1.4-.6 2.6-.6 1.2 0 1.6.6 2.6.6 1.1 0 1.8-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3 0 0-2.2-.9-2.2-3zM14.5 6.5c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.3.9.1 1.8-.4 2.3-1.1z"/>
-          </svg>
-        </button>
-        <button class="social" type="button" aria-label="Register with Google">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 6c1.6 0 2.9.6 3.8 1.5l1.7-1.6C16.2 4.6 14.5 4 12 4 8.7 4 6 6.7 6 10s2.7 6 6 6c3.5 0 5.8-2.4 5.8-5.9 0-.4 0-.7-.1-1.1H12v2.4h3.4c-.3 1.3-1.6 3-3.4 3-2 0-3.7-1.7-3.7-3.9S10 6 12 6z"/>
-          </svg>
-        </button>
-        <button class="social" type="button" aria-label="Register with X">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.4 3h3.2l-7 8 7.3 10h-5.5l-4.3-6-4.9 6H3.1l7.4-8.6L3.4 3H9l4 5.6L17.4 3zm-1.1 16.2h1.7L7.3 4.7H5.4l10.9 14.5z"/>
-          </svg>
-        </button>
-      </div>
-
-      <p class="terms">By continuing you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
-
-    </section>
-
-    <div class="flourish" aria-hidden="true">
-      <svg viewBox="0 0 224 70" fill="none">
-        <path d="M8 54C50 14 150 8 194 40" stroke="#1A237E" stroke-opacity=".26" stroke-width="2" stroke-dasharray="6 8" stroke-linecap="round"/>
-        <g transform="translate(198 44) rotate(125)">
-          <path d="M21 15.5 13.5 12V5.2a1.6 1.6 0 0 0-3.2 0V12L3 15.5V17l7.3-2.1v3.6l-2.2 1.6v1.3l3.8-1.1 3.8 1.1v-1.3L13.5 18.5v-3.6L21 17z" fill="#4CAF50" opacity=".85" transform="translate(-12 -12)"/>
-        </g>
-        <g fill="#FFFFFF" opacity=".6">
-          <ellipse cx="52" cy="30" rx="18" ry="8"/>
-          <ellipse cx="66" cy="25" rx="11" ry="6"/>
-        </g>
-        <g fill="#1A237E" opacity=".2">
-          <circle cx="30" cy="60" r="2.5"/>
-          <circle cx="122" cy="18" r="2.5"/>
-          <circle cx="176" cy="64" r="2"/>
-        </g>
-      </svg>
+    <div class="actions">
+      <button class="login-btn" id="loginBtn" type="submit" form="loginForm">Login</button>
+      <a class="forgot" href="#">Forgot Password?</a>
     </div>
 
-    <p class="footer">I Already Have an Account? <a href="#">Login</a></p>
+    <div class="divider" role="separator"><span>Or Login with</span></div>
+
+    <div class="socials">
+      <button class="social" type="button" aria-label="Login with Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M14.6 8.6h2.2V5.6h-2.5c-2.3 0-3.8 1.5-3.8 3.8v1.7H8.3v3h2.2V21h3.2v-6.9h2.4l.5-3h-2.9V9.6c0-.7.3-1 1-1z"/>
+        </svg>
+      </button>
+      <button class="social" type="button" aria-label="Login with Apple">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.3 12.7c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 8 .7 1 1.5 2 2.6 2 1 0 1.4-.6 2.6-.6 1.2 0 1.6.6 2.6.6 1.1 0 1.8-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3 0 0-2.2-.9-2.2-3zM14.5 6.5c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.3.9.1 1.8-.4 2.3-1.1z"/>
+        </svg>
+      </button>
+      <button class="social" type="button" aria-label="Login with Google">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 6c1.6 0 2.9.6 3.8 1.5l1.7-1.6C16.2 4.6 14.5 4 12 4 8.7 4 6 6.7 6 10s2.7 6 6 6c3.5 0 5.8-2.4 5.8-5.9 0-.4 0-.7-.1-1.1H12v2.4h3.4c-.3 1.3-1.6 3-3.4 3-2 0-3.7-1.7-3.7-3.9S10 6 12 6z"/>
+        </svg>
+      </button>
+      <button class="social" type="button" aria-label="Login with X">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.4 3h3.2l-7 8 7.3 10h-5.5l-4.3-6-4.9 6H3.1l7.4-8.6L3.4 3H9l4 5.6L17.4 3zm-1.1 16.2h1.7L7.3 4.7H5.4l10.9 14.5z"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="footer">Don't have an account? <a href="register.html">Register Now</a></p>
 
     <div class="home-indicator"></div>
   </main>
@@ -439,50 +386,46 @@
   const EYE_OPEN = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.6 12S6.2 5.6 12 5.6 21.4 12 21.4 12 17.8 18.4 12 18.4 2.6 12 2.6 12z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" stroke="currentColor" stroke-width="1.7"/></svg>';
   const EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.6 12S6.2 5.6 12 5.6 21.4 12 21.4 12 17.8 18.4 12 18.4 2.6 12 2.6 12z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" stroke="currentColor" stroke-width="1.7"/><path d="m4.8 4.8 14.4 14.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
 
-  function wireEye(btnId, inputId) {
-    const btn = document.getElementById(btnId);
-    const input = document.getElementById(inputId);
-
-    btn.innerHTML = EYE_OPEN;
-
-    btn.addEventListener("click", function () {
-      const show = input.type === "password";
-      input.type = show ? "text" : "password";
-      btn.innerHTML = show ? EYE_OFF : EYE_OPEN;
-      btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
-      btn.setAttribute("aria-pressed", String(show));
-      input.focus();
-    });
-  }
-
-  wireEye("eyePwd", "password");
-  wireEye("eyeConfirm", "confirm");
-
-  const confirmField = document.getElementById("confirmField");
-  const confirmInput = document.getElementById("confirm");
   const pwdInput = document.getElementById("password");
-  const registerBtn = document.getElementById("registerBtn");
+  const eyeBtn = document.getElementById("eyePwd");
 
-  registerBtn.addEventListener("click", function () {
-    if (registerBtn.dataset.busy === "1") return;
+  eyeBtn.innerHTML = EYE_OPEN;
 
-    if (confirmInput.value !== pwdInput.value) {
-      confirmField.classList.add("has-error", "shake");
-      window.setTimeout(function () { confirmField.classList.remove("shake"); }, 320);
-      confirmInput.focus();
-      return;
-    }
-
-    registerBtn.dataset.busy = "1";
-    registerBtn.textContent = "CREATING ACCOUNT...";
-    window.setTimeout(function () {
-      registerBtn.textContent = "REGISTER";
-      registerBtn.dataset.busy = "0";
-    }, 1600);
+  eyeBtn.addEventListener("click", function () {
+    const show = pwdInput.type === "password";
+    pwdInput.type = show ? "text" : "password";
+    eyeBtn.innerHTML = show ? EYE_OFF : EYE_OPEN;
+    eyeBtn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+    eyeBtn.setAttribute("aria-pressed", String(show));
+    pwdInput.focus();
   });
 
-  [pwdInput, confirmInput].forEach(function (field) {
-    field.addEventListener("input", function () { confirmField.classList.remove("has-error"); });
+  const loginForm = document.getElementById("loginForm");
+  const loginBtn = document.getElementById("loginBtn");
+
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (loginBtn.dataset.busy === "1") return;
+
+    loginBtn.dataset.busy = "1";
+    loginBtn.classList.add("is-busy");
+    loginBtn.textContent = "Signing in...";
+
+    window.setTimeout(function () {
+      loginBtn.textContent = "Login";
+      loginBtn.classList.remove("is-busy");
+      delete loginBtn.dataset.busy;
+    }, 1400);
+  });
+
+  const tabs = document.querySelectorAll(".social");
+  tabs.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      btn.animate(
+        [ { transform: "scale(1)" }, { transform: "scale(.9)" }, { transform: "scale(1)" } ],
+        { duration: 240, easing: "ease-out" }
+      );
+    });
   });
 </script>
 </body>
