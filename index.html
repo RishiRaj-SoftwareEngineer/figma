@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Trip Australia - Seat Details</title>
+<title>Trip Australia - Payment</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,21 +13,18 @@
   :root {
     --green: #4CAF50;
     --green-deep: #2E7D32;
-    --green-text: #3B9E4B;
-    --blue: #2196F3;
-    --blue-deep: #1565C0;
     --navy: #1A237E;
-    --ink: #232C6B;
     --cream: #FFF9C4;
-    --amber: #D98324;
-    --amber-circle: #F0A63C;
-    --cream-panel: #FCF3D6;
-    --panel: #F1F4F0;
+    --cream-ink: #8D6E00;
+    --pink: #F8D7DA;
+    --red: #D32F2F;
+    --gray-card: #F4F5F7;
     --gray: #E0E0E0;
-    --exit: #4A4A4A;
     --muted: #8B93A7;
+    --line: #E4E7ED;
     --white: #FFFFFF;
     --card-shadow: 0 6px 16px rgba(20,45,25,.10);
+    --soft-shadow: 0 2px 6px rgba(26,35,126,.05);
   }
 
   html, body { margin: 0; padding: 0; }
@@ -43,12 +40,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* device frame with the theme gradient */
   .screen {
     position: relative;
     width: 393px;
     height: 852px;
-    padding: 14px 18px 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -67,11 +62,20 @@
     pointer-events: none;
   }
 
-  /* header */
-  .app-bar {
+  .page {
     position: relative;
     z-index: 2;
-    height: 44px;
+    flex: 1;
+    min-height: 0;
+    padding: 14px 18px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* header */
+  .app-bar {
+    flex: none;
+    height: 46px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -87,27 +91,29 @@
 
   .back-btn {
     flex: none;
-    width: 34px; height: 34px;
+    width: 40px; height: 40px;
+    padding: 0;
     display: grid;
     place-items: center;
-    padding: 0;
-    border: 0;
-    background: none;
+    border: 2px solid rgba(255,255,255,.9);
+    border-radius: 50%;
+    background: var(--green);
     color: var(--white);
     cursor: pointer;
-    transition: transform .18s ease, opacity .18s ease;
+    box-shadow: 0 6px 14px rgba(30,90,40,.28);
+    transition: transform .18s ease, box-shadow .18s ease;
   }
 
-  .back-btn svg { width: 24px; height: 24px; }
-  .back-btn:hover { transform: translateX(-2px); opacity: .9; }
-  .back-btn:active { transform: scale(.92); }
+  .back-btn svg { width: 18px; height: 18px; }
+  .back-btn:hover { transform: translateY(-1px); box-shadow: 0 9px 18px rgba(30,90,40,.34); }
+  .back-btn:active { transform: scale(.93); }
+  .back-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.6), 0 6px 14px rgba(30,90,40,.28); }
 
-  /* page title card */
+  /* page title */
   .title-card {
-    position: relative;
-    z-index: 2;
+    flex: none;
     margin-top: 10px;
-    height: 50px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,477 +130,455 @@
     color: var(--navy);
   }
 
-  /* live selection counter */
-  .selection-count {
+  /* main grey card */
+  .main-card {
     position: relative;
-    z-index: 2;
-    margin: 7px 0 0;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .1px;
-    color: rgba(255,255,255,.92);
-    text-shadow: 0 1px 2px rgba(24,60,30,.28);
-  }
-
-  .selection-count b { font-weight: 700; color: #fff; }
-
-  /* notice banner */
-  .notice {
-    position: relative;
-    z-index: 2;
-    margin-top: 10px;
-    min-height: 48px;
-    padding: 9px 12px;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    border-radius: 14px;
-    background: var(--cream-panel);
-    box-shadow: var(--card-shadow);
-  }
-
-  .notice-icon {
-    flex: none;
-    width: 22px; height: 22px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--amber-circle);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1;
-  }
-
-  .notice p {
-    margin: 0;
-    font-size: 10.5px;
-    font-weight: 500;
-    line-height: 1.35;
-    color: var(--amber);
-  }
-
-  /* two column grid used by heads + illustrations + cabins */
-  .grid-2 {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 152px 188px;
-    gap: 17px;
-  }
-
-  /* cabin labels */
-  .cabin-heads { margin-top: 14px; }
-
-  .head { display: flex; flex-direction: column; gap: 3px; }
-  .head.economy { align-items: flex-end; text-align: right; }
-
-  .head-title {
-    font-size: 12.5px;
-    font-weight: 600;
-    letter-spacing: -.1px;
-    color: var(--white);
-    text-shadow: 0 1px 2px rgba(24,60,30,.25);
-  }
-
-  .head-sub {
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.78);
-  }
-
-  /* seat illustrations */
-  .illustrations { margin-top: 8px; }
-
-  .illu {
-    height: 76px;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    border-radius: 16px;
-    box-shadow: var(--card-shadow);
-  }
-
-  .illu.business { background: #F1F6EF; }
-  .illu.economy  { background: #EFF4FB; }
-
-  .illu svg { display: block; width: 82%; height: auto; }
-  .illu.economy svg { width: 72%; }
-
-  /* cabins */
-  .cabins {
-    margin-top: 14px;
-    align-items: start;
-  }
-
-  .col-left { display: flex; flex-direction: column; gap: 12px; }
-
-  .cabin-card {
-    padding: 11px;
-    border-radius: 18px;
-    background: var(--white);
-    box-shadow: var(--card-shadow);
-  }
-
-  .rows { display: flex; flex-direction: column; }
-
-  .row {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .rows.business .row { height: 30px; margin-bottom: 30px; }
-  .rows.economy  .row { height: 27px; margin-bottom: 8px; }
-  .rows .row:last-child { margin-bottom: 0; }
-
-  .aisle { flex: none; width: 12px; }
-
-  /* seats */
-  .seat {
-    position: relative;
-    z-index: 1;
-    flex: none;
-    padding: 0;
-    border: 0;
-    display: grid;
-    place-items: center;
-    font-family: inherit;
-    font-weight: 600;
-    line-height: 1;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
-  }
-
-  .seat::before {
-    content: "";
-    position: absolute;
-    top: 17%; left: 20%; right: 20%;
-    height: 3px;
-    border-radius: 3px;
-    background: currentColor;
-    opacity: .3;
-  }
-
-  .seat.b { width: 28px; height: 28px; border-radius: 9px; font-size: 10px; }
-  .seat.e { width: 23px; height: 23px; border-radius: 7px; font-size: 8.5px; }
-
-  .seat.is-available { color: #fff; }
-  .seat.is-available.b { background: var(--green); box-shadow: 0 2px 6px rgba(76,175,80,.30); }
-  .seat.is-available.e { background: var(--blue);  box-shadow: 0 2px 6px rgba(33,150,243,.30); }
-  .seat.is-available:hover { transform: translateY(-2px); }
-  .seat.is-available.b:hover { background: #43A047; box-shadow: 0 6px 12px rgba(76,175,80,.36); }
-  .seat.is-available.e:hover { background: #1E88E5; box-shadow: 0 6px 12px rgba(33,150,243,.36); }
-  .seat.is-available:active { transform: scale(.92); }
-
-  .seat.is-reserved { background: var(--gray); color: rgba(255,255,255,.9); cursor: not-allowed; }
-  .seat.is-exit { background: var(--exit); color: rgba(255,255,255,.55); cursor: not-allowed; }
-
-  .seat.is-selected { color: #fff; transform: translateY(-2px) scale(1.07); }
-  .seat.is-selected.b { background: var(--green-deep); box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--green), 0 6px 13px rgba(46,125,50,.40); }
-  .seat.is-selected.e { background: var(--blue-deep);  box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--blue), 0 6px 13px rgba(21,101,192,.40); }
-  .seat.is-selected::before { opacity: .45; }
-
-  .seat:focus-visible { outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--navy); }
-
-  /* exit rows */
-  .rows.economy .row.is-exit { margin-top: 16px; }
-
-  .rows.economy .row.is-exit::before {
-    content: "";
-    position: absolute;
-    left: -11px; right: -11px;
-    top: -22px; bottom: -7px;
-    z-index: 0;
-    border-radius: 10px;
-    background: linear-gradient(180deg, rgba(255,249,196,.5) 0%, var(--cream) 60%);
-  }
-
-  .exit-tag {
-    position: absolute;
-    top: -20px; left: 0; right: 0;
-    z-index: 2;
-    text-align: center;
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: #8D6E00;
-  }
-
-  /* legend */
-  .legend {
-    padding: 12px;
+    flex: 1;
+    min-height: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
-    border-radius: 18px;
-    background: var(--white);
+    border-radius: 22px;
+    background: var(--gray-card);
     box-shadow: var(--card-shadow);
   }
 
-  .legend-head {
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--green-text);
+  /* flight summary bar */
+  .flight-bar {
+    flex: none;
+    height: 92px;
+    padding: 13px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 14px;
+    background: var(--pink);
   }
 
-  .legend-item {
+  .fb-row { display: flex; align-items: center; gap: 10px; }
+
+  .fb-point { display: flex; flex-direction: column; gap: 2px; }
+  .fb-point.right { align-items: flex-end; text-align: right; }
+
+  .fb-time {
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.2px;
+    color: var(--red);
+  }
+
+  .fb-code {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    color: rgba(211,47,47,.72);
+  }
+
+  .fb-mid { flex: 1; display: flex; align-items: center; gap: 5px; }
+  .fb-mid .dash { flex: 1; height: 1.5px; border-radius: 2px; background: repeating-linear-gradient(90deg, rgba(211,47,47,.55) 0 4px, transparent 4px 8px); }
+  .fb-mid svg { flex: none; width: 14px; height: 14px; color: rgba(211,47,47,.75); transform: rotate(90deg); }
+
+  .fb-meta {
     display: flex;
     align-items: center;
-    gap: 9px;
-    font-size: 10.5px;
+    gap: 6px;
+    font-size: 10px;
     font-weight: 500;
-    color: #4A5372;
-    white-space: nowrap;
+    color: #A9505A;
   }
 
-  .swatch {
+  .fb-meta .sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(169,80,90,.6); }
+
+  /* total fare */
+  .fare-row {
+    flex: none;
+    margin-top: 14px;
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fare-label { font-size: 12.5px; font-weight: 600; color: var(--navy); }
+  .fare-value { font-size: 20px; font-weight: 700; letter-spacing: -.4px; color: var(--navy); }
+
+  /* payment methods */
+  .section-title {
+    flex: none;
+    margin-top: 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .pay-list { flex: none; margin-top: 10px; display: flex; flex-direction: column; gap: 12px; }
+
+  .pay-option {
+    position: relative;
+    height: 80px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 16px;
+    background: var(--white);
+    border: 1.5px solid transparent;
+    box-shadow: var(--soft-shadow);
+    cursor: pointer;
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+
+  .pay-option:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(26,35,126,.10); }
+
+  .pay-option.is-selected {
+    border-color: var(--green);
+    box-shadow: 0 8px 18px rgba(76,175,80,.20);
+  }
+
+  .pay-option input {
+    position: absolute;
+    width: 1px; height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .pay-logo {
+    flex: none;
+    width: 46px; height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--white);
+    border: 1px solid #E8EBF1;
+    color: var(--navy);
+  }
+
+  .logo-visa { font-size: 11px; font-weight: 700; font-style: italic; letter-spacing: -.3px; }
+  .logo-paypal { font-size: 8.5px; font-weight: 700; letter-spacing: -.2px; }
+  .logo-mc { position: relative; width: 26px; height: 16px; }
+  .logo-mc span { position: absolute; top: 0; width: 16px; height: 16px; border-radius: 50%; }
+  .logo-mc span:first-child { left: 0; background: var(--red); }
+  .logo-mc span:last-child { right: 0; background: #F0A63C; opacity: .85; }
+
+  .pay-info { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+  .pay-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .pay-num { font-size: 10.5px; font-weight: 500; letter-spacing: .04em; color: var(--muted); }
+
+  .pay-radio {
     flex: none;
     width: 20px; height: 20px;
     display: grid;
     place-items: center;
-    border-radius: 6px;
+    border-radius: 50%;
+    border: 2px solid #C9CFDA;
+    background: var(--white);
+    transition: border-color .18s ease, background-color .18s ease;
   }
 
-  .swatch.selected {
-    color: #fff;
+  .pay-radio::after {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--white);
+    transform: scale(0);
+    transition: transform .18s ease;
+  }
+
+  .pay-option.is-selected .pay-radio { border-color: var(--green); background: var(--green); }
+  .pay-option.is-selected .pay-radio::after { transform: scale(1); }
+
+  .pay-option input:focus-visible ~ .pay-radio { box-shadow: 0 0 0 3px rgba(76,175,80,.35); }
+
+  /* continue button + secure note */
+  .pay-actions { flex: none; margin-top: auto; display: flex; flex-direction: column; align-items: center; }
+
+  .continue-btn {
+    width: 313px;
+    height: 56px;
+    border: 0;
+    border-radius: 28px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: .2px;
+    color: var(--white);
+    cursor: pointer;
+    background: var(--green);
+    box-shadow: 0 10px 22px rgba(76,175,80,.38);
+    transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease;
+  }
+
+  .continue-btn:hover { background: #43A047; transform: translateY(-1px); box-shadow: 0 13px 26px rgba(76,175,80,.44); }
+  .continue-btn:active { transform: scale(.98); box-shadow: 0 6px 14px rgba(76,175,80,.34); }
+  .continue-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 0 0 6px rgba(76,175,80,.6); }
+
+  .secure-note {
+    margin-top: 12px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 12px;
+    background: var(--cream);
+  }
+
+  .secure-note svg { flex: none; width: 13px; height: 13px; color: var(--cream-ink); }
+
+  .secure-note span {
     font-size: 10px;
-    background: linear-gradient(135deg, var(--green) 0 50%, var(--blue) 50% 100%);
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--cream-ink);
   }
 
-  .swatch.exit { background: var(--exit); }
-  .swatch.reserved { background: var(--gray); box-shadow: inset 0 0 0 1px rgba(26,35,126,.06); }
-
-  /* home indicator */
-  .home-indicator {
-    margin-top: auto;
-    margin-bottom: 9px;
-    align-self: center;
+  /* bottom navigation */
+  .bottom-nav {
+    position: relative;
+    z-index: 3;
     flex: none;
+    height: 74px;
+    padding: 8px 10px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: var(--green);
+    box-shadow: 0 -6px 18px rgba(20,45,25,.16);
+  }
+
+  .tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+    color: rgba(255,255,255,.65);
+    transition: color .18s ease;
+  }
+
+  .tab svg { width: 22px; height: 22px; }
+
+  .tab span { font-size: 9px; font-weight: 500; letter-spacing: .1px; }
+
+  .tab:hover { color: rgba(255,255,255,.85); }
+
+  .tab.is-active { color: var(--white); }
+  .tab.is-active span { font-weight: 600; }
+
+  .tab.is-active svg {
+    padding: 5px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.20);
+    box-sizing: content-box;
+    margin: -5px 0;
+  }
+
+  .tab:focus-visible { outline: none; }
+
+  .tab:focus-visible svg {
+    border-radius: 12px;
+    box-shadow: 0 0 0 2px rgba(255,255,255,.8);
+  }
+
+  .nav-home-bar {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
     width: 126px; height: 5px;
     border-radius: 99px;
     background: rgba(255,255,255,.72);
   }
 
-  @keyframes pop {
-    0%   { transform: translateY(-2px) scale(.9); }
-    60%  { transform: translateY(-3px) scale(1.14); }
-    100% { transform: translateY(-2px) scale(1.07); }
-  }
-
-  .seat.pop { animation: pop .26s ease-out; }
-
   @media (prefers-reduced-motion: reduce) {
-    .seat, .back-btn { transition: none; }
-    .seat.pop { animation: none; }
+    .pay-option, .continue-btn, .tab, .back-btn { transition: none; }
   }
 </style>
 </head>
 <body>
-  <main class="screen" aria-label="Trip Australia seat details screen">
+  <main class="screen" aria-label="Trip Australia payment screen">
 
-    <header class="app-bar">
-      <div class="brand">Trip Australia</div>
-      <button class="back-btn" type="button" aria-label="Go back">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </header>
+    <div class="page">
 
-    <section class="title-card">
-      <h1 class="title">Seat Details</h1>
-    </section>
+      <header class="app-bar">
+        <div class="brand">Trip Australia</div>
+        <button class="back-btn" type="button" aria-label="Go back">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </header>
 
-    <p class="selection-count" id="selectionCount">No seats selected</p>
+      <section class="title-card">
+        <h1 class="title">Payment</h1>
+      </section>
 
-    <section class="notice">
-      <span class="notice-icon" aria-hidden="true">!</span>
-      <p>Please review your seat selection. Exit row seats cannot be reserved.</p>
-    </section>
+      <section class="main-card">
 
-    <div class="grid-2 cabin-heads">
-      <div class="head business">
-        <span class="head-title">Business Class Seat</span>
-        <span class="head-sub">Rows 1 - 5</span>
-      </div>
-      <div class="head economy">
-        <span class="head-title">Economy Class Seat</span>
-        <span class="head-sub">Rows 6 - 17</span>
-      </div>
-    </div>
+        <div class="flight-bar">
+          <div class="fb-row">
+            <div class="fb-point">
+              <span class="fb-time">06:00 AM</span>
+              <span class="fb-code">SYD</span>
+            </div>
+            <div class="fb-mid">
+              <span class="dash"></span>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21 15.5 13.5 12V5.2a1.6 1.6 0 0 0-3.2 0V12L3 15.5V17l7.3-2.1v3.6l-2.2 1.6v1.3l3.8-1.1 3.8 1.1v-1.3L13.5 18.5v-3.6L21 17z"/>
+              </svg>
+              <span class="dash"></span>
+            </div>
+            <div class="fb-point right">
+              <span class="fb-time">07:35 AM</span>
+              <span class="fb-code">MEL</span>
+            </div>
+          </div>
+          <div class="fb-meta">1 hr 35 min<span class="sep"></span>Virgin Australia</div>
+        </div>
 
-    <div class="grid-2 illustrations">
-      <div class="illu business">
-        <svg viewBox="0 0 120 74" fill="none" aria-hidden="true">
-          <ellipse cx="58" cy="66" rx="30" ry="4.5" fill="#1A237E" opacity=".07"/>
-          <path d="M40 58h36l4 7H36z" fill="#2E7D32"/>
-          <rect x="26" y="41" width="56" height="18" rx="9" fill="#4CAF50"/>
-          <g transform="rotate(-7 57 27)">
-            <rect x="41" y="11" width="33" height="34" rx="10" fill="#4CAF50"/>
-            <rect x="41" y="4" width="33" height="12" rx="6" fill="#2E7D32"/>
-          </g>
-          <rect x="72" y="33" width="22" height="9" rx="4.5" fill="#2E7D32"/>
-        </svg>
-      </div>
-      <div class="illu economy">
-        <svg viewBox="0 0 120 74" fill="none" aria-hidden="true">
-          <ellipse cx="58" cy="66" rx="26" ry="4" fill="#1A237E" opacity=".07"/>
-          <path d="M42 59h32l4 6H38z" fill="#1565C0"/>
-          <rect x="30" y="45" width="48" height="15" rx="7.5" fill="#2196F3"/>
-          <g transform="rotate(-6 57 32)">
-            <rect x="42" y="18" width="30" height="30" rx="9" fill="#2196F3"/>
-            <rect x="43" y="12" width="28" height="10" rx="5" fill="#1565C0"/>
-          </g>
-          <rect x="68" y="38" width="18" height="8" rx="4" fill="#1565C0"/>
-        </svg>
-      </div>
-    </div>
-    <div class="grid-2 cabins">
-      <div class="col-left">
-        <section class="cabin-card" aria-label="Business class seat map">
-          <div class="rows business" id="businessRows"></div>
-        </section>
+        <div class="fare-row">
+          <span class="fare-label">Total Fare</span>
+          <span class="fare-value">A$247</span>
+        </div>
 
-        <aside class="legend" aria-label="Seat legend">
-          <span class="legend-head">Legend</span>
-          <div class="legend-item"><span class="swatch selected">&#10003;</span>Selected</div>
-          <div class="legend-item"><span class="swatch exit"></span>Emergency exit</div>
-          <div class="legend-item"><span class="swatch reserved"></span>Reserved</div>
-        </aside>
-      </div>
+        <h2 class="section-title">Payment Methods</h2>
 
-      <section class="cabin-card" aria-label="Economy class seat map">
-        <div class="rows economy" id="economyRows"></div>
+        <div class="pay-list">
+
+          <label class="pay-option is-selected">
+            <input type="radio" name="payment" value="visa" checked />
+            <span class="pay-logo"><span class="logo-visa">VISA</span></span>
+            <span class="pay-info">
+              <span class="pay-name">VISA</span>
+              <span class="pay-num">********0017</span>
+            </span>
+            <span class="pay-radio" aria-hidden="true"></span>
+          </label>
+
+          <label class="pay-option">
+            <input type="radio" name="payment" value="paypal" />
+            <span class="pay-logo"><span class="logo-paypal">PayPal</span></span>
+            <span class="pay-info">
+              <span class="pay-name">PayPal</span>
+              <span class="pay-num">********0017</span>
+            </span>
+            <span class="pay-radio" aria-hidden="true"></span>
+          </label>
+
+          <label class="pay-option">
+            <input type="radio" name="payment" value="mastercard" />
+            <span class="pay-logo"><span class="logo-mc"><span></span><span></span></span></span>
+            <span class="pay-info">
+              <span class="pay-name">Mastercard</span>
+              <span class="pay-num">********0017</span>
+            </span>
+            <span class="pay-radio" aria-hidden="true"></span>
+          </label>
+
+        </div>
+
+        <div class="pay-actions">
+          <button class="continue-btn" type="button" id="continueBtn">Continue</button>
+          <div class="secure-note">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3 5 6v5.5c0 4.4 2.9 8.2 7 9.5 4.1-1.3 7-5.1 7-9.5V6l-7-3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              <path d="m9.2 11.8 2 2 3.6-3.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Payments are encrypted and secured by Trip Australia.</span>
+          </div>
+        </div>
+
       </section>
     </div>
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 10.8 12 4l8 6.8V19a1.2 1.2 0 0 1-1.2 1.2H15v-5.4H9v5.4H5.2A1.2 1.2 0 0 1 4 19v-8.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        <span>Home</span>
+      </button>
 
-    <div class="home-indicator"></div>
+      <button class="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.8"/>
+          <path d="m15.6 15.6 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span>Flights</span>
+      </button>
+
+      <button class="tab is-active" type="button" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 8.6A2.6 2.6 0 0 1 6.6 6h10.8A2.6 2.6 0 0 1 20 8.6v1.1a2.3 2.3 0 0 0 0 4.6v1.1A2.6 2.6 0 0 1 17.4 18H6.6A2.6 2.6 0 0 1 4 15.4v-1.1a2.3 2.3 0 0 0 0-4.6V8.6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M12 8.4v7.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="1.6 2.4"/>
+        </svg>
+        <span>Booking</span>
+      </button>
+
+      <button class="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="4" y="7.4" width="16" height="11.6" rx="2.4" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M9 7.4V5.6A1.6 1.6 0 0 1 10.6 4h2.8A1.6 1.6 0 0 1 15 5.6v1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9.4 11.6v4M14.6 11.6v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>Trips</span>
+      </button>
+
+      <button class="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8.6" r="3.6" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M5.6 19.6a6.5 6.5 0 0 1 12.8 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span>Profile</span>
+      </button>
+
+      <span class="nav-home-bar" aria-hidden="true"></span>
+    </nav>
   </main>
 
 <script>
-  const BUSINESS = {
-    startRow: 1,
-    rowCount: 5,
-    letters: ["A", "B", "C", "D"],
-    aisleAfter: 2,
-    sizeClass: "b",
-    label: "Business",
-    reserved: ["1C", "2A", "4D", "5B"],
-    exitRows: []
-  };
+  const payOptions = Array.prototype.slice.call(document.querySelectorAll(".pay-option"));
 
-  const ECONOMY = {
-    startRow: 6,
-    rowCount: 12,
-    letters: ["A", "B", "C", "D", "E", "F"],
-    aisleAfter: 3,
-    sizeClass: "e",
-    label: "Economy",
-    reserved: ["7A", "8F", "9C", "10D", "11B", "12E", "13A", "15C", "16F", "17D"],
-    exitRows: [6, 14]
-  };
-
-  const countEl = document.getElementById("selectionCount");
-
-  function buildCabin(cabin, mountId) {
-    const mount = document.getElementById(mountId);
-    const reserved = new Set(cabin.reserved);
-    const exits = new Set(cabin.exitRows);
-
-    for (let i = 0; i < cabin.rowCount; i++) {
-      const rowNumber = cabin.startRow + i;
-      const row = document.createElement("div");
-      row.className = "row";
-
-      if (exits.has(rowNumber)) {
-        row.classList.add("is-exit");
-        const tag = document.createElement("span");
-        tag.className = "exit-tag";
-        tag.textContent = "Emergency exit";
-        row.appendChild(tag);
-      }
-
-      cabin.letters.forEach((letter, index) => {
-        if (index === cabin.aisleAfter) {
-          const aisle = document.createElement("span");
-          aisle.className = "aisle";
-          aisle.setAttribute("aria-hidden", "true");
-          row.appendChild(aisle);
-        }
-
-        const code = rowNumber + letter;
-        const seat = document.createElement("button");
-        seat.type = "button";
-        seat.className = "seat " + cabin.sizeClass;
-        seat.dataset.code = code;
-
-        let state = "available";
-        if (exits.has(rowNumber)) state = "exit";
-        else if (reserved.has(code)) state = "reserved";
-
-        seat.dataset.state = state;
-        seat.dataset.label = cabin.label + " seat " + code;
-        seat.classList.add("is-" + state);
-        seat.textContent = letter;
-        seat.setAttribute("aria-pressed", "false");
-        seat.setAttribute("aria-label", seat.dataset.label + ", " + state);
-        if (state !== "available") seat.disabled = true;
-
-        row.appendChild(seat);
-      });
-
-      mount.appendChild(row);
-    }
+  function syncPayment() {
+    payOptions.forEach(function (option) {
+      const input = option.querySelector("input");
+      option.classList.toggle("is-selected", input.checked);
+    });
   }
 
-  function updateCount() {
-    const seats = Array.prototype.slice.call(document.querySelectorAll(".seat.is-selected"));
-    const n = seats.length;
-
-    if (n === 0) {
-      countEl.textContent = "No seats selected";
-      return;
-    }
-
-    countEl.innerHTML = "<b>" + n + "</b> " + (n === 1 ? "seat" : "seats") + " selected";
-  }
-
-  function toggleSeat(seat) {
-    if (seat.dataset.state !== "available") return;
-
-    const letter = seat.dataset.code.slice(-1);
-    const isSelected = seat.classList.toggle("is-selected");
-
-    seat.textContent = isSelected ? "\u2713" : letter;
-    seat.setAttribute("aria-pressed", String(isSelected));
-    seat.setAttribute("aria-label", seat.dataset.label + ", " + (isSelected ? "selected" : "available"));
-
-    if (isSelected) {
-      seat.classList.remove("pop");
-      void seat.offsetWidth;
-      seat.classList.add("pop");
-    }
-
-    updateCount();
-  }
-
-  document.addEventListener("click", function (event) {
-    const seat = event.target.closest(".seat");
-    if (seat) toggleSeat(seat);
+  payOptions.forEach(function (option) {
+    option.querySelector("input").addEventListener("change", syncPayment);
   });
 
-  buildCabin(BUSINESS, "businessRows");
-  buildCabin(ECONOMY, "economyRows");
-  updateCount();
+  const tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      tabs.forEach(function (other) {
+        other.classList.remove("is-active");
+        other.removeAttribute("aria-current");
+      });
+      tab.classList.add("is-active");
+      tab.setAttribute("aria-current", "page");
+    });
+  });
+
+  syncPayment();
+
+  document.getElementById("continueBtn").addEventListener("click", function (event) {
+    const selected = document.querySelector('input[name="payment"]:checked');
+    event.currentTarget.textContent = "Paying with " + selected.value.toUpperCase();
+    window.setTimeout(function () {
+      event.currentTarget.textContent = "Continue";
+    }, 1400);
+  });
 </script>
 </body>
 </html>
